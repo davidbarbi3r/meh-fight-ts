@@ -1,0 +1,38 @@
+.char {
+    width: 50%;
+    border: 5px inset black;
+    margin-right: 1rem;
+    margin: 0 auto;
+}
+
+.char-container {
+    width: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.char-meh {
+    position: relative;
+    width: 25rem;
+}
+
+.char-img {
+    width: 20rem;
+    border: inset 2px black;
+    border-radius: 15%;
+    margin-bottom: 2rem; 
+}
+
+.char-stats {
+    position: absolute;
+    top: -20px;
+    font-weight: bold;
+    left: -15px;
+    border: 2px inset black;
+    text-align: left;
+    padding: 0.3rem;
+    margin: 0;
+    border-radius: 15%;
+    background-color: bisque;
+}

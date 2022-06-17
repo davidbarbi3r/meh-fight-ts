@@ -1,0 +1,100 @@
+.App {
+  text-align: center;
+  margin: 0 auto;
+  background-color: rgba(170, 192, 43, 0.562);
+  height: 100vh;
+  max-width: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+/*--- Game Started Layout ----*/
+
+.game-content {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 80%;
+  align-items: center;
+  text-align: center;
+}
+
+.App-game-container {
+  margin: 0 auto;
+}
+
+.App-game-players-container{
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 5rem;
+  align-items: center;
+}
+
+/*--- Header ---*/
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.std-btn {
+  padding: 0.5rem 0.75rem;
+  margin: 0 0.5rem;
+  font-size: 1.25rem;
+  border: solid 2px black;
+  border-radius: 10%;
+  background-color:rgba(219, 111, 9, 0.411) ;
+  transition: all 200ms ease-out; 
+}
+
+.Header-rack-btn {
+  top: 10rem;
+}
+
+.std-btn:hover {
+  cursor: pointer;
+  background-color:rgba(216, 168, 123, 0.438) ;
+}
+
+
+/*--- Game Starter ----*/
+
+.game-starter {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  max-height: 50%;
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.game-starter-charSelection {
+  display: flex;
+}
+
+.game-starter-char {
+  border: 1px solid black;
+  margin: 1em;
+  border-radius: 10px;
+  padding: 1em;
+  transition: all 200ms ease;
+}
+
+.game-starter-char-text {
+  padding: 0.1em;
+}
+
+.game-starter-char:focus,
+.game-starter-char:hover {
+  border: 5px solid black;
+}
+
+.game-starter-char img {
+  width: 300px;
+}
+
