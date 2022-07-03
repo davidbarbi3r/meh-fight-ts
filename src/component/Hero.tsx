@@ -3,21 +3,21 @@ import { HeroModel } from '../data/Data';
 import '../style/Char.css';
 
 interface HeroProps {
-    hero: HeroModel[]
+    hero: HeroModel
 }
 
 function Hero(props: HeroProps) {
     return (
         <div className='char'>
-            <h2>{props.hero[0].name}</h2>
+            <h2>{props.hero.name}</h2>
             <div className="char-container">
                 <div className="char-meh">
-                    <img src={`./images/heros/${props.hero[0].img}`} 
-                         alt={`${props.hero[0].name}`}
+                    <img src={`./images/heros/${props.hero.img}`} 
+                         alt={`${props.hero.name}`}
                          className="char-img"></img>
                     <div className="char-stats">
-                        <div>{props.hero[0].hp} hp</div>
-                        <div>{props.hero[0].mana} mana</div>
+                        <div>{props.hero.hp} hp</div>
+                        <div>{props.hero.mana} mana</div>
                     </div>
                 </div>
             </div>
