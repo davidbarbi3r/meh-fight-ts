@@ -12,7 +12,7 @@ function Cards(props: CardsProps) {
     return (
         <div className='card-rack'>
             {props.cards.map(card => 
-                <div className='card' onClick={() => props.useCard(card)}>
+                <div className='card' onClick={() => props.useCard(card)} key={card.id}>
                     <h3>{card.name}</h3>
                     <ul className='cards-specs'>
                         <li>{card.type === "Attack" ? "Dmg: " + card.damage : 
