@@ -7,7 +7,10 @@ export interface HeroModel {
      name: string,  
      hp: number,
      mana: number,
-     img: string
+     img: string,
+     crit: number,
+     critDmg: number,
+     miss: number
 }
 
 export interface EnnemyModel {
@@ -15,7 +18,12 @@ export interface EnnemyModel {
     name: string,
     hp: number,
     dmg: number,
-    img: string
+    img: string,
+    crit: number,
+    critDmg: number,
+    miss: number,
+    dmgCalcul(arg0: number): number,
+    attack: number,
 }
 
 export interface CardModel {
@@ -31,26 +39,46 @@ export interface CardModel {
 
 /*--- Classes ---*/
 
-class Hero {
+class Hero implements HeroModel{
     constructor (
         public id: number,
         public name: string,  
         public hp: number,
         public mana: number,
         public defense : number,
-        public img: string ){}
+        public img: string,
+        public crit: number, //increase crit probability
+        public critDmg: number, //increase crit damages
+        public miss: number //increase missed attack probability
+     ){}
 }
 
-class Ennemy {
+class Ennemy implements EnnemyModel {
     constructor (
         public id: number,
         public name: string,
         public hp: number,
         public dmg: number,
-        public img: string){}
+        public img: string,
+        public crit: number, //increase crit probability
+        public critDmg: number, //increase crit damages
+        public miss: number //increase missed attack probability
+        ){}
+    
+    public attack = this.dmgCalcul(Math.random())   
+
+    dmgCalcul (random: number){
+        if (random < (this.crit/100)) { 
+            return this.dmg * (1+(this.critDmg / 100))
+        } else if (random < ((this.crit/100)+(this.miss/100))){
+            return this.dmg * 0
+        } else {
+            return this.dmg
+        }
+    }
 }
 
-class Card {
+class Card implements CardModel{
     constructor (
         public id: string,
         public name: string,
@@ -75,15 +103,15 @@ class Card {
 /* --- Data Arrays --- */
 
 export let heroArray: HeroModel[] = [
-    new Hero(63, "Dumpling", 100, 10, 0, "dumpling.png"),
-    new Hero(87, "Wizard", 100, 10, 0, "wizard.png"),
-    new Hero(65, "ElonMeh", 100, 10, 0, "elonmeh.png")
+    new Hero(63, "Dumpling", 100, 15, 0, "dumpling.png", 5, 10, 0),
+    new Hero(87, "Wizard", 100, 10, 0, "wizard.png", 0, 20, 0),
+    new Hero(65, "ElonMeh", 100, 10, 0, "elonmeh.png", 30, 5, 5)
 ]
 
 export let ennemiesArray: EnnemyModel[] = [
-    new Ennemy(81, "Dog", 25, 10, "dog.png"),
-    new Ennemy(74, "Clown", 65, 5, "clown.png"),
-    new Ennemy(71, "Orc", 100, 5, "orc.png")
+    new Ennemy(81, "Dog", 25, 10, "dog.png", 10, 10, 10),
+    new Ennemy(74, "Clown", 65, 5, "clown.png", 20, 5, 10),
+    new Ennemy(71, "Orc", 100, 5, "orc.png", 50, 5, 20)
 ]
 
 export let cardArray: CardModel[] = [
