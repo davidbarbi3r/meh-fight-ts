@@ -5,7 +5,7 @@ function Intro(props:any) {
 
     const heroImgHtml = props.heroArray.map((hero: { id: number; img: string; name: string;}) => 
             <button className='game-starter-char' 
-                    onClick={() => props.selectHero(hero.id)}>
+                    onClick={() => props.selectHero(hero.id)} key={hero.id}>
                 <img src={`./images/heros/${hero.img}`} alt={`${hero.name}`}></img>
             </button>
         )
