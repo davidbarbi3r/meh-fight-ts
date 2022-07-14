@@ -5,8 +5,8 @@ function Header(props: any) {
         <header>
             <h1>Meh Fight</h1>
             <div className="Header-rack-btn">
-                <button className="std-btn" onClick={props.resetGame}>Reset</button>
-                <button className="std-btn">Save</button>
+                <button className="std-btn" onClick={props.resetGame} disabled>Reset</button>
+                <button className="std-btn" disabled>Save</button>
             </div>
         </header>
     );
