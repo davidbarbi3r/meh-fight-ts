@@ -10,8 +10,7 @@ import Cards from './component/Cards';
 /* Known bugs :
   - Crit / Missed / normal dmg don't work with ennemies,
   - When an Ennemy is dead he stays one turn more,
-  - Ennemies change from dog to orc instead of dog to clown to dog,
-  - Problem with cards distribution between discardPile & deck & hand */
+  - Ennemies change from dog to orc instead of dog to clown to dog,*/
 
 /* To be implemented : 
   - Crit / Missed / normal dmg with attack cards,
@@ -102,7 +101,7 @@ function App() {
 
   const endTurn = ():void => {
     if (currentEnnemy.hp === 0) {
-      //set nouveau current ennemy
+      //set new current ennemy
       const newEnnemy = ennemies.pop() 
       setHeroSelected(prev => {
         return {...prev, mana: heroArray[0].mana }})
