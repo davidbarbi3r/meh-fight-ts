@@ -4,6 +4,7 @@ import Header from './component/Header';
 import Hero from './component/Hero';
 import Intro from './component/Intro';
 import {cardArray, CardModel, ennemiesArray, EnnemyModel, heroArray, HeroModel} from './data/Data';
+import { shuffle } from './utils/Utils';
 import Ennemy from './component/Ennemy';
 import Cards from './component/Cards';
 
@@ -31,18 +32,14 @@ function App() {
   const [isFighting, setIsFighting] = useState(false)
   const [turnCount, setTurnCount] = useState(0)
 
-  const selectHero = (id: number) => {
+  const selectHero = (id: string) => {
     const hero = heroArray.filter(hero => hero.id === id)[0]
     setHeroSelected(hero)
   }
 
   const getDeck = ():CardModel[] => {
     const deckArray = [...cardArray]
-    deckArray.sort(function(a, b){
-      if (a.id < b.id) return -1;
-      if (a.id > b.id) return 1;
-      return 0;
-    })
+    shuffle(deckArray)
     return deckArray
   }
  
@@ -53,11 +50,13 @@ function App() {
     setHand(hand)
     setTurnCount(prev => prev++)
   }
+
+  
   
   function startGame():void {
     if (heroSelected){
       setIsGameStarted(true)
-      setDeck(() => getDeck())
+      setDeck(getDeck)
     } else {
       window.alert("You must select a Hero")
       throw new Error ("You must select a Hero")
@@ -86,7 +85,15 @@ function App() {
       alert("Not enought mana, pick an other card or end turn")
     } 
 
-    else if (card.type === "Attack") {
+    else if (card.type === "Defense") {
+
+      setDiscardPile(prev => [...prev, card])
+      setHeroSelected(prev => {
+        return {...prev, mana: prev.mana - card.cost, defense: card.protection}})
+      setHand(hand.filter(item => item.id !== card.id))
+      }
+    
+    else {
 
         if (currentEnnemy.hp - card.damage <= 0 ){
           setHeroSelected(prev => {
@@ -94,7 +101,6 @@ function App() {
             setCurrentEnnemy(prev => { 
             return {...prev, hp: prev.hp = 0 }})
           setDiscardPile(prev => [...prev, card])
-          setIsFighting(false)
         } 
         
         else {
@@ -107,12 +113,7 @@ function App() {
         }
     } 
     
-    else if (card.type === "Defense") {
-        setDiscardPile(prev => [...prev, card])
-        setHeroSelected(prev => {
-          return {...prev, mana: prev.mana - card.cost, defense: prev.defense + card.protection}})
-        setHand(hand.filter(item => item.id !== card.id))
-        }
+    
   }
 
   const endTurn = ():void => {
