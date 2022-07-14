@@ -36,7 +36,7 @@ function App() {
     setHeroSelected(hero)
   }
 
-  function getDeck ():CardModel[] {
+  const getDeck = ():CardModel[] => {
     const deckArray = [...cardArray]
     deckArray.sort(function(a, b){
       if (a.id < b.id) return -1;
@@ -46,7 +46,7 @@ function App() {
     return deckArray
   }
  
-  function startFight (deck: CardModel[]):void{   
+  const startFight = (deck: CardModel[]):void => {   
     let hand:CardModel[] = deck.splice(0,5)
     setEnnemies(ennemies.splice(1))
     setIsFighting(true)
@@ -77,12 +77,10 @@ function App() {
       setDiscardPile([])
       hand = deck.splice(0,5)
     }
-    
     setHand(hand)
   }
 
   const useCard = (card: CardModel):void => {
-    console.log(currentEnnemy.attack)
     if (heroSelected.mana - card.cost < 0) {
       alert("Not enought mana, end turn")
     } else if (currentEnnemy.hp - card.damage <= 0 ){
@@ -102,16 +100,18 @@ function App() {
     }
   }
 
-  function endTurn ():void{
+  const endTurn = ():void => {
     if (currentEnnemy.hp === 0) {
       //set nouveau current ennemy
       const newEnnemy = ennemies.pop() 
       setHeroSelected(prev => {
         return {...prev, mana: heroArray[0].mana }})
       setCurrentEnnemy(newEnnemy? newEnnemy : currentEnnemy)
+      setDiscardPile(prev => [...prev, ...hand])
       drawCards()
     } else {
       setTimeout(()=> {
+        setDiscardPile(prev => [...prev, ...hand])
         setHeroSelected(prev => {
           return {...prev, hp: prev.hp - currentEnnemy.dmg, mana: heroArray[0].mana }})
         drawCards()

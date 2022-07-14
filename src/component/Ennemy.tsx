@@ -6,7 +6,6 @@ interface EnnemyProps {
 }
 
 function Ennemy(props: EnnemyProps) {
-    console.log(props)
     return (
         <div className='char'>
             <h2>{props.ennemies.name}</h2>

@@ -8,7 +8,6 @@ interface CardsProps {
 }
 
 function Cards(props: CardsProps) {
-    console.log(props)
     return (
         <div className='card-rack'>
             {props.cards.map(card => 
