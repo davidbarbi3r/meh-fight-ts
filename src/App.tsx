@@ -15,8 +15,9 @@ import Cards from './component/Cards';
 /* To be implemented : 
   - Crit / Missed / normal dmg with attack cards,
   - Loot when an Ennemy is dead (card ? object ? gold ?),
-  - multiple ennemies ? 
-  - Display hero caracteristics in hero selection*/
+  - multiple ennemies in same fight ? 
+  - Display hero caracteristics in hero selection
+  - Fight animations*/
 
 function App() {
 
@@ -80,39 +81,61 @@ function App() {
   }
 
   const useCard = (card: CardModel):void => {
+    
     if (heroSelected.mana - card.cost < 0) {
-      alert("Not enought mana, end turn")
-    } else if (currentEnnemy.hp - card.damage <= 0 ){
-      setHeroSelected(prev => {
-        return {...prev, mana: prev.mana - card.cost}})
-        setCurrentEnnemy(prev => { 
-        return {...prev, hp: prev.hp = 0 }})
-      setDiscardPile(prev => [...prev, card])
-      setIsFighting(false)
-    } else {
-      setDiscardPile(prev => [...prev, card])
-      setHeroSelected(prev => {
-        return {...prev, mana: prev.mana - card.cost}})
-        setCurrentEnnemy(prev => { 
-        return {...prev, hp: prev.hp - card.damage }})
-      setHand(hand.filter(item => item.id !== card.id))
-    }
+      alert("Not enought mana, pick an other card or end turn")
+    } 
+
+    else if (card.type === "Attack") {
+
+        if (currentEnnemy.hp - card.damage <= 0 ){
+          setHeroSelected(prev => {
+            return {...prev, mana: prev.mana - card.cost}})
+            setCurrentEnnemy(prev => { 
+            return {...prev, hp: prev.hp = 0 }})
+          setDiscardPile(prev => [...prev, card])
+          setIsFighting(false)
+        } 
+        
+        else {
+          setDiscardPile(prev => [...prev, card])
+          setHeroSelected(prev => {
+            return {...prev, mana: prev.mana - card.cost}})
+            setCurrentEnnemy(prev => { 
+            return {...prev, hp: prev.hp - card.damage }})
+          setHand(hand.filter(item => item.id !== card.id))
+        }
+    } 
+    
+    else if (card.type === "Defense") {
+        setDiscardPile(prev => [...prev, card])
+        setHeroSelected(prev => {
+          return {...prev, mana: prev.mana - card.cost, defense: prev.defense + card.protection}})
+        setHand(hand.filter(item => item.id !== card.id))
+        }
   }
 
   const endTurn = ():void => {
+
     if (currentEnnemy.hp === 0) {
       //set new current ennemy
       const newEnnemy = ennemies.pop() 
       setHeroSelected(prev => {
-        return {...prev, mana: heroArray[0].mana }})
+        return {...prev, mana: heroArray[0].mana, defense: 0}})
       setCurrentEnnemy(newEnnemy? newEnnemy : currentEnnemy)
       setDiscardPile(prev => [...prev, ...hand])
       drawCards()
-    } else {
+    } 
+    
+    else {
       setTimeout(()=> {
         setDiscardPile(prev => [...prev, ...hand])
         setHeroSelected(prev => {
-          return {...prev, hp: prev.hp - currentEnnemy.dmg, mana: heroArray[0].mana }})
+          return heroSelected.defense 
+                  ? currentEnnemy.dmg <= heroSelected.defense 
+                      ? {...prev, mana: heroArray[0].mana, defense: 0} 
+                      : {...prev, hp: prev.hp + heroSelected.defense - currentEnnemy.dmg, mana: heroArray[0].mana, defense: 0}
+                  : {...prev, hp: prev.hp - currentEnnemy.dmg, mana: heroArray[0].mana}})
         drawCards()
         }, 2000)
     }

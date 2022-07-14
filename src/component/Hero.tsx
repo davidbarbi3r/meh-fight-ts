@@ -18,6 +18,7 @@ function Hero(props: HeroProps) {
                     <div className="char-stats">
                         <div>{props.hero.hp} hp</div>
                         <div>{props.hero.mana} mana</div>
+                        <div>{props.hero.defense} def</div>
                     </div>
                 </div>
             </div>

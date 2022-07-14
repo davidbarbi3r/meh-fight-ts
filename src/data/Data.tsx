@@ -7,6 +7,7 @@ export interface HeroModel {
      name: string,  
      hp: number,
      mana: number,
+     defense: number,
      img: string,
      crit: number,
      critDmg: number,
@@ -17,6 +18,7 @@ export interface EnnemyModel {
     id: number,
     name: string,
     hp: number,
+    defense: number,
     dmg: number,
     img: string,
     crit: number,
@@ -59,6 +61,7 @@ class Ennemy implements EnnemyModel {
         public name: string,
         public hp: number,
         public dmg: number,
+        public defense: number,
         public img: string,
         public crit: number, //increase crit probability
         public critDmg: number, //increase crit damages
@@ -109,9 +112,9 @@ export let heroArray: HeroModel[] = [
 ]
 
 export let ennemiesArray: EnnemyModel[] = [
-    new Ennemy(81, "Dog", 25, 10, "dog.png", 10, 10, 10),
-    new Ennemy(74, "Clown", 65, 5, "clown.png", 20, 5, 10),
-    new Ennemy(71, "Orc", 100, 5, "orc.png", 50, 5, 20)
+    new Ennemy(81, "Dog", 25, 10, 0,"dog.png", 10, 10, 10),
+    new Ennemy(74, "Clown", 65, 5, 0,"clown.png", 20, 5, 10),
+    new Ennemy(71, "Orc", 100, 5, 0,"orc.png", 50, 5, 20)
 ]
 
 export let cardArray: CardModel[] = [
