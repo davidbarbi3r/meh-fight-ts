@@ -1,9 +1,10 @@
 import {nanoid} from 'nanoid'
+import { shuffle } from '../utils/Utils'
 
 /* --- Interfaces ---*/
 
 export interface HeroModel {
-     id: number,
+     id: string,
      name: string,  
      hp: number,
      mana: number,
@@ -15,7 +16,7 @@ export interface HeroModel {
 }
 
 export interface EnnemyModel {
-    id: number,
+    id: string,
     name: string,
     hp: number,
     defense: number,
@@ -43,7 +44,7 @@ export interface CardModel {
 
 class Hero implements HeroModel{
     constructor (
-        public id: number,
+        public id: string,
         public name: string,  
         public hp: number,
         public mana: number,
@@ -57,7 +58,7 @@ class Hero implements HeroModel{
 
 class Ennemy implements EnnemyModel {
     constructor (
-        public id: number,
+        public id: string,
         public name: string,
         public hp: number,
         public dmg: number,
@@ -106,16 +107,18 @@ class Card implements CardModel{
 /* --- Data Arrays --- */
 
 export let heroArray: HeroModel[] = [
-    new Hero(63, "Dumpling", 100, 15, 0, "dumpling.png", 5, 10, 0),
-    new Hero(87, "Wizard", 100, 10, 0, "wizard.png", 0, 20, 0),
-    new Hero(65, "ElonMeh", 100, 10, 0, "elonmeh.png", 30, 5, 5)
+    new Hero(nanoid(8), "Dumpling", 100, 15, 0, "dumpling.png", 5, 10, 0),
+    new Hero(nanoid(8), "Wizard", 100, 10, 0, "wizard.png", 0, 20, 0),
+    new Hero(nanoid(8), "ElonMeh", 100, 10, 0, "elonmeh.png", 30, 5, 5)
 ]
 
 export let ennemiesArray: EnnemyModel[] = [
-    new Ennemy(81, "Dog", 25, 10, 0,"dog.png", 10, 10, 10),
-    new Ennemy(74, "Clown", 65, 5, 0,"clown.png", 20, 5, 10),
-    new Ennemy(71, "Orc", 100, 5, 0,"orc.png", 50, 5, 20)
+    new Ennemy(nanoid(8), "Dog", 25, 10, 0,"dog.png", 10, 10, 10),
+    new Ennemy(nanoid(8), "Clown", 65, 5, 0,"clown.png", 20, 5, 10),
+    new Ennemy(nanoid(8), "Orc", 100, 5, 0,"orc.png", 50, 5, 20)
 ]
+
+shuffle(ennemiesArray)
 
 export let cardArray: CardModel[] = [
     new Card(nanoid(8), "MEHHHH", "Attack", "*", 10, 0, 5, 1),
