@@ -10,8 +10,7 @@ import Cards from './component/Cards';
 
 /* Known bugs :
   - Crit / Missed / normal dmg don't work with ennemies,
-  - When an Ennemy is dead he stays one turn more,
-  - Ennemies change from dog to orc instead of dog to clown to dog,*/
+*/
 
 /* To be implemented : 
   - Crit / Missed / normal dmg with attack cards,

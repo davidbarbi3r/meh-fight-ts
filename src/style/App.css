@@ -1,7 +1,9 @@
 .App {
   text-align: center;
   margin: 0 auto;
-  background-color: rgba(170, 192, 43, 0.562);
+  /* background-image: url("/public/images/background/129281.jpg"); */
+  background-color: #c7e0c8;
+  background-size: contain;
   height: 100vh;
   max-width: 100%;
   justify-content: center;
