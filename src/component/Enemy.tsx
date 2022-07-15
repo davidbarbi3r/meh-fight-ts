@@ -1,22 +1,22 @@
 import React from 'react';
-import { EnnemyModel } from '../data/Data';
+import { EnemyModel } from '../data/Data';
 
-interface EnnemyProps {
-    ennemies: EnnemyModel
+interface EnemyProps {
+    enemies: EnemyModel
 }
 
-function Ennemy(props: EnnemyProps) {
+function Enemy(props: EnemyProps) {
     return (
         <div className='char'>
-            <h2>{props.ennemies.name}</h2>
+            <h2>{props.enemies.name}</h2>
             <div className="char-container">
                 <div className="char-meh">
-                    <img src={`./images/ennemies/${props.ennemies.img}`} 
-                         alt={props.ennemies.name} 
+                    <img src={`./images/enemies/${props.enemies.img}`} 
+                         alt={props.enemies.name} 
                          className='char-img'></img>
                     <div className="char-stats">
                         <div>
-                            {props.ennemies.hp} hp
+                            {props.enemies.hp} hp
                         </div>
                     </div>
                 </div>
@@ -25,4 +25,4 @@ function Ennemy(props: EnnemyProps) {
     );
 }
 
-export default Ennemy;
+export default Enemy;

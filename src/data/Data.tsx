@@ -15,7 +15,7 @@ export interface HeroModel {
      miss: number
 }
 
-export interface EnnemyModel {
+export interface EnemyModel {
     id: string,
     name: string,
     hp: number,
@@ -56,7 +56,7 @@ class Hero implements HeroModel{
      ){}
 }
 
-class Ennemy implements EnnemyModel {
+class Ennemy implements EnemyModel {
     constructor (
         public id: string,
         public name: string,
@@ -112,13 +112,13 @@ export let heroArray: HeroModel[] = [
     new Hero(nanoid(8), "ElonMeh", 100, 10, 0, "elonmeh.png", 30, 5, 5)
 ]
 
-export let ennemiesArray: EnnemyModel[] = [
+export let enemiesArray: EnemyModel[] = [
     new Ennemy(nanoid(8), "Dog", 25, 10, 0,"dog.png", 10, 10, 10),
     new Ennemy(nanoid(8), "Clown", 65, 5, 0,"clown.png", 20, 5, 10),
     new Ennemy(nanoid(8), "Orc", 100, 5, 0,"orc.png", 50, 5, 20)
 ]
 
-shuffle(ennemiesArray)
+shuffle(enemiesArray)
 
 export let cardArray: CardModel[] = [
     new Card(nanoid(8), "MEHHHH", "Attack", "*", 10, 0, 5, 1),

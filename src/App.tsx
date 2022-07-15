@@ -3,28 +3,29 @@ import './style/App.css';
 import Header from './component/Header';
 import Hero from './component/Hero';
 import Intro from './component/Intro';
-import {cardArray, CardModel, ennemiesArray, EnnemyModel, heroArray, HeroModel} from './data/Data';
+import {cardArray, CardModel, enemiesArray, EnemyModel, heroArray, HeroModel} from './data/Data';
 import { shuffle } from './utils/Utils';
-import Ennemy from './component/Ennemy';
+import Enemy from './component/Enemy';
 import Cards from './component/Cards';
 
 /* Known bugs :
-  - Crit / Missed / normal dmg don't work with ennemies,
+  - Crit / Missed / normal dmg don't work with enemies,
 */
 
 /* To be implemented : 
   - Crit / Missed / normal dmg with attack cards,
-  - Loot when an Ennemy is dead (card ? object ? gold ?),
-  - multiple ennemies in same fight ? 
+  - Loot when an Enemy is dead (card ? object ? gold ?),
+  - multiple enemies in same fight ? 
   - Display hero caracteristics in hero selection
-  - Fight animations*/
+  - Fight animations
+*/
 
 function App() {
 
   const [isGameStarted, setIsGameStarted] = useState(false)
   const [heroSelected, setHeroSelected] = useState<HeroModel>(heroArray[0]) 
-  const [ennemies, setEnnemies] = useState<EnnemyModel[]>(ennemiesArray)
-  const [currentEnnemy, setCurrentEnnemy] = useState<EnnemyModel>(ennemiesArray[0])
+  const [enemies, setEnemies] = useState<EnemyModel[]>(enemiesArray)
+  const [currentEnemy, setCurrentEnemy] = useState<EnemyModel>(enemiesArray[0])
   const [deck, setDeck] = useState<CardModel[]>([])
   const [hand, setHand] = useState<CardModel[]>([])
   const [discardPile, setDiscardPile] = useState<CardModel[]>([])
@@ -44,7 +45,7 @@ function App() {
  
   const startFight = (deck: CardModel[]):void => {   
     let hand:CardModel[] = deck.splice(0,5)
-    setEnnemies(ennemies.splice(1))
+    setEnemies(enemies.splice(1))
     setIsFighting(true)
     setHand(hand)
     setTurnCount(prev => prev++)
@@ -94,10 +95,10 @@ function App() {
     
     else {
 
-        if (currentEnnemy.hp - card.damage <= 0 ){
+        if (currentEnemy.hp - card.damage <= 0 ){
           setHeroSelected(prev => {
             return {...prev, mana: prev.mana - card.cost}})
-            setCurrentEnnemy(prev => { 
+            setCurrentEnemy(prev => { 
             return {...prev, hp: prev.hp = 0 }})
           setDiscardPile(prev => [...prev, card])
         } 
@@ -106,7 +107,7 @@ function App() {
           setDiscardPile(prev => [...prev, card])
           setHeroSelected(prev => {
             return {...prev, mana: prev.mana - card.cost}})
-            setCurrentEnnemy(prev => { 
+            setCurrentEnemy(prev => { 
             return {...prev, hp: prev.hp - card.damage }})
           setHand(hand.filter(item => item.id !== card.id))
         }
@@ -117,12 +118,12 @@ function App() {
 
   const endTurn = ():void => {
 
-    if (currentEnnemy.hp === 0) {
-      //set new current ennemy
-      const newEnnemy = ennemies.pop() 
+    if (currentEnemy.hp === 0) {
+      //set new current enemy
+      const newEnemy = enemies.pop() 
       setHeroSelected(prev => {
         return {...prev, mana: heroArray[0].mana, defense: 0}})
-      setCurrentEnnemy(newEnnemy? newEnnemy : currentEnnemy)
+      setCurrentEnemy(newEnemy? newEnemy : currentEnemy)
       setDiscardPile(prev => [...prev, ...hand])
       drawCards()
     } 
@@ -132,17 +133,15 @@ function App() {
         setDiscardPile(prev => [...prev, ...hand])
         setHeroSelected(prev => {
           return heroSelected.defense 
-                  ? currentEnnemy.dmg <= heroSelected.defense 
+                  ? currentEnemy.dmg <= heroSelected.defense 
                       ? {...prev, mana: heroArray[0].mana, defense: 0} 
-                      : {...prev, hp: prev.hp + heroSelected.defense - currentEnnemy.dmg, mana: heroArray[0].mana, defense: 0}
-                  : {...prev, hp: prev.hp - currentEnnemy.dmg, mana: heroArray[0].mana}})
+                      : {...prev, hp: prev.hp + heroSelected.defense - currentEnemy.dmg, mana: heroArray[0].mana, defense: 0}
+                  : {...prev, hp: prev.hp - currentEnemy.dmg, mana: heroArray[0].mana}})
         drawCards()
         }, 2000)
     }
-    //si ennemy mort : invoquer nouvel ennemy
-    //+ remettre main normal + restaurer mana
-    //si ennemy pas mort : ennemy realise action
-    //+ remettre main normal + restaurer mana
+
+    console.log(turnCount)
   }
 
   const gameHtml = isGameStarted ? 
@@ -151,7 +150,7 @@ function App() {
       <section className='App-game-container'>
         <div className='App-game-players-container'>
           <h1><Hero hero = {heroSelected}/></h1>
-          <h1><Ennemy ennemies = {currentEnnemy}/></h1> 
+          <h1><Enemy enemies = {currentEnemy}/></h1> 
         </div>
         <div className='App-game-card-container'>
           {isFighting ? <div className='App-game-hand-container'>
