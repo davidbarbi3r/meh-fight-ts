@@ -79,6 +79,11 @@ Twitter - [@gnark_eth]([https://twitter.com/gnark_eth]) - davidbarbi3r@gmail.com
 Project Link: [https://github.com/davidbarbi3r/meh-fight-ts](https://github.com/davidbarbi3r/meh-fight-ts)
 Test the game: [https://davidbarbi3r.github.io/meh-fight-ts/](https://davidbarbi3r.github.io/meh-fight-ts/)
 
+#### Artist
+Art by : [@edwardtheartist](https://twitter.com/edwardtheartist)
+
+Artist page : [https://edwardfduffy.com/](https://edwardfduffy.com/)
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
