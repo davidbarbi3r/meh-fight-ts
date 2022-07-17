@@ -1,6 +1,3 @@
-import React from 'react';
-
-
 function Intro(props:any) {
 
     const heroImgHtml = props.heroArray.map((hero: { id: number; img: string; name: string;}) => 

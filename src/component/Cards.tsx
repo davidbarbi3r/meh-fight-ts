@@ -1,4 +1,3 @@
-import React from 'react';
 import { CardModel } from '../data/Data';
 import '../style/Cards.css'
 

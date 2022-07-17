@@ -1,4 +1,3 @@
-import React from 'react';
 import { HeroModel } from '../data/Data';
 import '../style/Char.css';
 
