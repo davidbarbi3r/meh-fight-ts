@@ -10,7 +10,7 @@ function Enemy(props: EnemyProps) {
             <h2>{props.enemies.name}</h2>
             <div className="char-container">
                 <div className="char-meh">
-                    <img src={`/images/enemies/${props.enemies.img}`} 
+                    <img src={`./images/enemies/${props.enemies.img}`} 
                          alt={props.enemies.name} 
                          className='char-img'></img>
                     <div className="char-stats">
