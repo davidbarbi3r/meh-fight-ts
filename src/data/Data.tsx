@@ -26,7 +26,7 @@ export interface EnemyModel {
     critDmg: number,
     miss: number,
     dmgCalcul(arg0: number): number,
-    attack: number,
+    attack: (random: number) => number,
 }
 
 export interface CardModel {
@@ -69,9 +69,9 @@ class Ennemy implements EnemyModel {
         public miss: number //increase missed attack probability
         ){}
     
-    public attack = this.dmgCalcul(Math.random())   
+    public attack = this.dmgCalcul   
 
-    dmgCalcul (random: number){
+    dmgCalcul (random: number): number{
         if (random < (this.crit/100)) { 
             return this.dmg * (1+(this.critDmg / 100))
         } else if (random < ((this.crit/100)+(this.miss/100))){

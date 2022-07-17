@@ -1,6 +1,6 @@
-import { CardModel, EnnemyModel } from "../data/Data";
+import { CardModel, EnemyModel, cardArray, HeroModel, heroArray } from "../data/Data";
 
-export const shuffle = (array: CardModel[] | EnnemyModel[]) => {
+export const shuffle = (array: CardModel[] | EnemyModel[]) => {
     array.sort(function(a, b){
       if (a.id < b.id) return -1;
       if (a.id > b.id) return 1;
@@ -9,3 +9,13 @@ export const shuffle = (array: CardModel[] | EnnemyModel[]) => {
     return array
   }
 
+export const getDeck = ():CardModel[] => {
+    const deckArray = [...cardArray]
+    shuffle(deckArray)
+    return deckArray
+  }
+
+// export const selectHero = (id: string, setHero:React.SetStateAction<HeroModel>) => {
+//     const hero = heroArray.filter(hero => hero.id === id)[0]
+//     setHero(hero)
+//   }

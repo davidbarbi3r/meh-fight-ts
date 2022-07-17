@@ -3,8 +3,8 @@ import './style/App.css';
 import Header from './component/Header';
 import Hero from './component/Hero';
 import Intro from './component/Intro';
-import {cardArray, CardModel, enemiesArray, EnemyModel, heroArray, HeroModel} from './data/Data';
-import { shuffle } from './utils/Utils';
+import {CardModel, enemiesArray, EnemyModel, heroArray, HeroModel} from './data/Data';
+import { getDeck } from './utils/Utils';
 import Enemy from './component/Enemy';
 import Cards from './component/Cards';
 
@@ -37,12 +37,6 @@ function App() {
     setHeroSelected(hero)
   }
 
-  const getDeck = ():CardModel[] => {
-    const deckArray = [...cardArray]
-    shuffle(deckArray)
-    return deckArray
-  }
- 
   const startFight = (deck: CardModel[]):void => {   
     let hand:CardModel[] = deck.splice(0,5)
     setEnemies(enemies.splice(1))
@@ -51,7 +45,6 @@ function App() {
     setTurnCount(prev => prev++)
   }
 
-  
   
   function startGame():void {
     if (heroSelected){
@@ -118,6 +111,8 @@ function App() {
 
   const endTurn = ():void => {
 
+    const rand = Math.random()
+    const enemyDmg:number = currentEnemy.attack(rand)
     if (currentEnemy.hp === 0) {
       //set new current enemy
       const newEnemy = enemies.pop() 
@@ -133,10 +128,10 @@ function App() {
         setDiscardPile(prev => [...prev, ...hand])
         setHeroSelected(prev => {
           return heroSelected.defense 
-                  ? currentEnemy.dmg <= heroSelected.defense 
+                  ? enemyDmg <= heroSelected.defense 
                       ? {...prev, mana: heroArray[0].mana, defense: 0} 
-                      : {...prev, hp: prev.hp + heroSelected.defense - currentEnemy.dmg, mana: heroArray[0].mana, defense: 0}
-                  : {...prev, hp: prev.hp - currentEnemy.dmg, mana: heroArray[0].mana}})
+                      : {...prev, hp: prev.hp + heroSelected.defense - enemyDmg, mana: heroArray[0].mana, defense: 0}
+                  : {...prev, hp: prev.hp - enemyDmg, mana: heroArray[0].mana}})
         drawCards()
         }, 2000)
     }
@@ -145,34 +140,34 @@ function App() {
   }
 
   const gameHtml = isGameStarted ? 
-    <div className='game-content'>  
-      <Header resetGame = {resetGame}/>  
+    <div className='game-content'>
+      <Header resetGame={resetGame} />
       <section className='App-game-container'>
         <div className='App-game-players-container'>
-          <h1><Hero hero = {heroSelected}/></h1>
-          <h1><Enemy enemies = {currentEnemy}/></h1> 
+          <h1><Hero hero={heroSelected} /></h1>
+          <h1><Enemy enemies={currentEnemy} /></h1>
         </div>
         <div className='App-game-card-container'>
           {isFighting ? <div className='App-game-hand-container'>
-                          <Cards cards = {hand}
-                                useCard = {useCard}/>
-                          <button className='std-btn btn-end'
-                                  onClick={endTurn}>End turn</button>
-                        </div> : 
-          <button className='std-btn' onClick={() => startFight(deck)}>
-            Fight
-          </button>}
+            <Cards cards={hand}
+              useCard={useCard} />
+            <button className='std-btn btn-end'
+              onClick={endTurn}>End turn</button>
+          </div> :
+            <button className='std-btn' onClick={() => startFight(deck)}>
+              Fight
+            </button>}
         </div>
       </section>
-    </div> : <Intro startGame = {startGame}
-                    heroArray = {heroArray}
-                    selectHero = {selectHero}
-                    isGameStarted = {isGameStarted}/>
+    </div> : <Intro startGame={startGame}
+      heroArray={heroArray}
+      selectHero={selectHero}
+      isGameStarted={isGameStarted} />
     
   return (
-      <div className="App">
-        {gameHtml}
-      </div>
+    <div className="App">
+      {gameHtml}
+    </div>
   )
 }
 
