@@ -1,9 +1,14 @@
 function Intro(props:any) {
 
-    const heroImgHtml = props.heroArray.map((hero: { id: number; img: string; name: string;}) => 
+    const heroImgHtml = props.heroArray.map((hero: { id: number; img: string; name: string; hp: number; mana: number; handSize: number}) => 
             <button className='game-starter-char' 
                     onClick={() => props.selectHero(hero.id)} key={hero.id}>
                 <img src={`./images/heros/${hero.img}`} alt={`${hero.name}`}></img>
+                <div className="Stats">
+                    <p>Hp: {hero.hp}</p>
+                    <p>Mana: {hero.mana}</p>
+                    <p>Hand Size: {hero.handSize}</p>
+                </div>
             </button>
         )
     return (

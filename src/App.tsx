@@ -15,7 +15,6 @@ import Cards from './component/Cards';
   - Crit / Missed / normal dmg with attack cards,
   - Loot when an Enemy is dead (card ? object ? gold ?),
   - multiple enemies in same fight ? 
-  - Display hero caracteristics in hero selection
   - Fight animations
 */
 
@@ -37,7 +36,7 @@ function App() {
   }
 
   const startFight = (deck: CardModel[]):void => {   
-    let hand:CardModel[] = deck.splice(0,5)
+    let hand:CardModel[] = deck.splice(0,heroSelected.handSize)
     setEnemies(enemies.splice(1))
     setIsFighting(true)
     setHand(hand)
@@ -60,12 +59,12 @@ function App() {
 
   const drawCards= ():void => {
     let hand:CardModel[] = []
-    if (deck.length > 5) {
-      hand = deck.splice(0,5)
+    if (deck.length > heroSelected.handSize) {
+      hand = deck.splice(0,heroSelected.handSize)
     } else {
       setDeck(prev => [...prev, ...discardPile])
       setDiscardPile([])
-      hand = deck.splice(0,5)
+      hand = deck.splice(0, heroSelected.handSize)
     }
     setHand(hand)
   }

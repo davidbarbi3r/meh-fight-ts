@@ -12,7 +12,8 @@ export interface HeroModel {
      img: string,
      crit: number,
      critDmg: number,
-     miss: number
+     miss: number,
+     handSize: number,
 }
 
 export interface EnemyModel {
@@ -52,7 +53,8 @@ class Hero implements HeroModel{
         public img: string,
         public crit: number, //increase crit probability
         public critDmg: number, //increase crit damages
-        public miss: number //increase missed attack probability
+        public miss: number, //increase missed attack probability
+        public handSize: number
      ){}
 }
 
@@ -107,9 +109,9 @@ class Card implements CardModel{
 /* --- Data Arrays --- */
 
 export let heroArray: HeroModel[] = [
-    new Hero(nanoid(8), "Dumpling", 100, 15, 0, "dumpling.png", 5, 10, 0),
-    new Hero(nanoid(8), "Wizard", 100, 10, 0, "wizard.png", 0, 20, 0),
-    new Hero(nanoid(8), "ElonMeh", 100, 10, 0, "elonmeh.png", 30, 5, 5)
+    new Hero(nanoid(8), "Dumpling", 60, 15, 0, "dumpling.png", 5, 10, 0, 4),
+    new Hero(nanoid(8), "Wizard", 100, 10, 0, "wizard.png", 0, 20, 0, 5),
+    new Hero(nanoid(8), "ElonMeh", 120, 10, 0, "elonmeh.png", 30, 5, 5, 6)
 ]
 
 export let enemiesArray: EnemyModel[] = [
