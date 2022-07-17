@@ -9,7 +9,6 @@ import Enemy from './component/Enemy';
 import Cards from './component/Cards';
 
 /* Known bugs :
-  - Crit / Missed / normal dmg don't work with enemies,
 */
 
 /* To be implemented : 
@@ -45,7 +44,6 @@ function App() {
     setTurnCount(prev => prev++)
   }
 
-  
   function startGame():void {
     if (heroSelected){
       setIsGameStarted(true)
@@ -56,11 +54,11 @@ function App() {
     }
   }
 
-  function resetGame():void {
+  const resetGame = ():void => {
     setIsGameStarted(false)
   }
 
-  const drawCards= () => {
+  const drawCards= ():void => {
     let hand:CardModel[] = []
     if (deck.length > 5) {
       hand = deck.splice(0,5)
@@ -74,7 +72,11 @@ function App() {
 
   const useCard = (card: CardModel):void => {
     
-    if (heroSelected.mana - card.cost < 0) {
+    if (currentEnemy.hp === 0) {
+      alert("Enemy is dead, end turn.")
+    } 
+
+    else if (heroSelected.mana - card.cost < 0) {
       alert("Not enought mana, pick an other card or end turn")
     } 
 
@@ -87,7 +89,7 @@ function App() {
       }
     
     else {
-
+    
         if (currentEnemy.hp - card.damage <= 0 ){
           setHeroSelected(prev => {
             return {...prev, mana: prev.mana - card.cost}})
@@ -104,9 +106,7 @@ function App() {
             return {...prev, hp: prev.hp - card.damage }})
           setHand(hand.filter(item => item.id !== card.id))
         }
-    } 
-    
-    
+    }  
   }
 
   const endTurn = ():void => {
