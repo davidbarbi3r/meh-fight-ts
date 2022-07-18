@@ -1,5 +1,5 @@
 /* Known bugs :
-*/
+ */
 
 /* To be implemented : 
   - Crit / Missed / normal dmg with attack cards,
@@ -8,15 +8,14 @@
   - Fight animations
 */
 
-import Game from "./component/Game"
+import Game from "./modules/game/components/Game";
 
 function App() {
-    
   return (
     <div className="App">
-      <Game/>
+      <Game />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
