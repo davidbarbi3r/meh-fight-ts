@@ -23,9 +23,11 @@ function Game() {
   const [hand, setHand] = useState<CardModel[]>([]);
   const [discardPile, setDiscardPile] = useState<CardModel[]>([]);
   const [turnCount, setTurnCount] = useState(0);
+  const [heroMana, setHeroMana] = useState(0)
 
   const selectHero = (id: string) => {
     const hero = heroArray.filter((hero) => hero.id === id)[0];
+    setHeroMana(hero.mana)
     setHeroSelected(hero);
   };
 
@@ -35,7 +37,7 @@ function Game() {
     setCurrentEnemy(newEnemy ? newEnemy : currentEnemy);
     setDeck(prev => [...prev, card])
     setHeroSelected((prev) => {
-      return { ...prev, mana: heroArray[0].mana, defense: 0 };
+      return { ...prev, mana: heroMana, defense: 0 };
     });
     // setDiscardPile((prev) => [...prev, ...hand]);
     drawCards();
@@ -76,6 +78,8 @@ function Game() {
   };
 
   const useCard = (card: CardModel): void => {
+    console.log("mana" + heroMana)
+
     if (currentEnemy.hp === 0) {
       alert("Enemy is dead, end turn.");
     } else if (heroSelected.mana - card.cost < 0) {
@@ -130,14 +134,14 @@ function Game() {
         setHeroSelected((prev) => {
           return heroSelected.defense
             ? enemyDmg <= heroSelected.defense
-              ? { ...prev, mana: heroArray[0].mana, defense: 0 }
+              ? { ...prev, mana: heroMana, defense: 0 }
               : {
                   ...prev,
                   hp: prev.hp + heroSelected.defense - enemyDmg,
-                  mana: heroArray[0].mana,
+                  mana: heroMana,
                   defense: 0,
                 }
-            : { ...prev, hp: prev.hp - enemyDmg, mana: heroArray[0].mana };
+            : { ...prev, hp: prev.hp - enemyDmg, mana: heroMana };
         });
         drawCards();
       }, 1500);
