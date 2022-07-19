@@ -70,6 +70,7 @@ function Game() {
       setDiscardPile([]);
       setDeck(prev => shuffle(prev))}
     setDiscardPile((prev) => [...prev, ...hand]);
+    shuffle(deck)
     let newHand = deck.splice(0, heroSelected.handSize);
     setHand(newHand);
   };
