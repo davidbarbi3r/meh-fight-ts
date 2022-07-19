@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/meh-fight-ts/static/css/main.eb667231.css",
-    "main.js": "/meh-fight-ts/static/js/main.c1895c84.js",
+    "main.css": "/meh-fight-ts/static/css/main.66c7dd5f.css",
+    "main.js": "/meh-fight-ts/static/js/main.c11577f6.js",
     "static/js/787.9c216696.chunk.js": "/meh-fight-ts/static/js/787.9c216696.chunk.js",
     "index.html": "/meh-fight-ts/index.html",
-    "main.eb667231.css.map": "/meh-fight-ts/static/css/main.eb667231.css.map",
-    "main.c1895c84.js.map": "/meh-fight-ts/static/js/main.c1895c84.js.map",
+    "main.66c7dd5f.css.map": "/meh-fight-ts/static/css/main.66c7dd5f.css.map",
+    "main.c11577f6.js.map": "/meh-fight-ts/static/js/main.c11577f6.js.map",
     "787.9c216696.chunk.js.map": "/meh-fight-ts/static/js/787.9c216696.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.eb667231.css",
-    "static/js/main.c1895c84.js"
+    "static/css/main.66c7dd5f.css",
+    "static/js/main.c11577f6.js"
   ]
 }
