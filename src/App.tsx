@@ -6,6 +6,7 @@
   - multiple enemies in same fight ? 
   - Fight animations
 */
+import "./index.css"
 
 import Game from "./modules/game/components/Game";
 

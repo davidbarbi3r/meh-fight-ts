@@ -1,7 +1,26 @@
-export default function Footer() {
-  const style = {
-    backgroundColor: "#dazdgffd",
-  };
+import "../../style/Footer.css";
 
-  return <footer style={style}></footer>;
+export default function Footer() {
+  return (
+    <footer>
+      <p>
+        Made by : @Gnark
+        <a href="https://twitter.com/gnark_eth" target={"#"}>
+        <i className="devicon-twitter-original"></i>
+        </a>
+        <a href="https://github.com/davidbarbi3r" target={"#"}>
+          <i className="devicon-github-original"></i>
+        </a>
+      </p>
+      <p>
+        Assets/Art by : @edwardtheartist
+        <a href="https://twitter.com/edwardtheartist" target={"#"}>
+          <i className="devicon-twitter-original"></i>
+        </a>
+        <a href="https://edwardfduffy.com/" target={"#"}>
+          <i className="devicon-chrome-plain"></i>
+        </a>
+      </p>
+    </footer>
+  );
 }

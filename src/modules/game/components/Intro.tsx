@@ -27,7 +27,7 @@ function Intro(props: any) {
     )
   );
   return (
-    <div>
+    <div className="App">
       <Header/>
       <section className="game-starter">
         <section className="game-starter-charSelection">{heroImgHtml}</section>
