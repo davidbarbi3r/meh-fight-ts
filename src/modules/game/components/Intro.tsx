@@ -17,7 +17,7 @@ function Intro(props: any) {
         onClick={() => props.selectHero(hero.id)}
         key={hero.id}
       >
-        <img src={`./images/heros/${hero.img}`} alt={`${hero.name}`}></img>
+        <img src={`${hero.img}`} alt={`${hero.name}`}></img>
         <div className="Stats">
           <p>Hp: {hero.hp}</p>
           <p>Mana: {hero.mana}</p>

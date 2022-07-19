@@ -43,8 +43,8 @@ function BattleGround({
           </div>
         </div>
       </section>
-      <p>Discard pile size: {discardPile}</p>
-      <p>Deck size: {deck}</p>
+      {/* <p>Discard pile size: {discardPile}</p>
+      <p>Deck size: {deck}</p> */}
       <Footer />
     </div>
   );

@@ -1,27 +1,30 @@
 .char {
     width: 50%;
-    border: 5px inset black;
     margin-right: 1rem;
     margin: 0 auto;
-}
-
-.char-container {
-    width: auto;
     display: flex;
     align-items: center;
     flex-direction: column;
 }
 
+.char-container {
+    width: auto;
+}
+
 .char-meh {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     position: relative;
     width: 25rem;
+    margin: 0 auto;
 }
 
 .char-img {
     width: 20rem;
     border: inset 2px black;
     border-radius: 15%;
-    margin-bottom: 2rem; 
+    margin: 0 auto; 
 }
 
 .char-stats {

@@ -1,4 +1,5 @@
 import { EnemyModel } from "../../data/Data";
+import "../../style/Char.css"
 
 interface EnemyProps {
   enemies: EnemyModel;
@@ -7,11 +8,11 @@ interface EnemyProps {
 function Enemy(props: EnemyProps) {
   return (
     <div className="char">
-      <h2>{props.enemies.name}</h2>
+      {/* <h2>{props.enemies.name}</h2> */}
       <div className="char-container">
         <div className="char-meh">
           <img
-            src={`./images/enemies/${props.enemies.img}`}
+            src={`${props.enemies.img}`}
             alt={props.enemies.name}
             className="char-img"
           ></img>

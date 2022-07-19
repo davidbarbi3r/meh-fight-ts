@@ -16,6 +16,7 @@ header {
     border-radius: 50px;
     background-color:rgba(219, 111, 9, 0.411) ;
     transition: all 200ms ease-out; 
+    font-family: 'Acme', sans-serif;
   }
   
   .btn-end {

@@ -31,12 +31,12 @@ function Game() {
 
   const selectCard = (cardselected: CardModel) => {
     const card = currentEnemy.loot.filter((card) => card === cardselected)[0]
-    setDeck(prev => [...prev, card])
     const newEnemy = enemies.pop();
+    setCurrentEnemy(newEnemy ? newEnemy : currentEnemy);
+    setDeck(prev => [...prev, card])
     setHeroSelected((prev) => {
       return { ...prev, mana: heroArray[0].mana, defense: 0 };
     });
-    setCurrentEnemy(newEnemy ? newEnemy : currentEnemy);
     // setDiscardPile((prev) => [...prev, ...hand]);
     drawCards();
     setGameState(gameStatus.fighting)
@@ -95,7 +95,7 @@ function Game() {
           return { ...prev, mana: prev.mana - card.cost };
         });
         setCurrentEnemy((prev) => {
-          return { ...prev, hp: (prev.hp = 0) };
+          return { ...prev, hp: 0 };
         });
         setDiscardPile((prev) => [...prev, card]);
       } else {
@@ -115,8 +115,16 @@ function Game() {
     const rand = Math.random();
     const enemyDmg: number = currentEnemy.attack(rand);
     if (currentEnemy.hp === 0) {
-      setGameState(gameStatus.enemyDead)
-    } else {
+      enemies.length ? 
+      setGameState(gameStatus.enemyDead) : 
+      setGameState(gameStatus.endGame)
+    } else if (heroSelected.defense + heroSelected.hp <= enemyDmg) {
+      setHeroSelected((prev) => {return {
+        ...prev, 
+        hp: 0
+      }})
+      setGameState(gameStatus.endGame)
+    } else{
       setTimeout(() => {
         setHeroSelected((prev) => {
           return heroSelected.defense
@@ -131,7 +139,6 @@ function Game() {
             : { ...prev, hp: prev.hp - enemyDmg, mana: heroArray[0].mana };
         });
         drawCards();
-        setEnemies(enemies.splice(1));
       }, 1500);
     }
     console.log(turnCount);
@@ -158,7 +165,8 @@ function Game() {
     <SelectLoot
     cards={currentEnemy.loot}
     action={selectCard}/> : 
-    <EndGame/>
+    <EndGame
+    heroHp={heroSelected.hp}/>
 
   return (<div>{gameHtml}</div>);
 }

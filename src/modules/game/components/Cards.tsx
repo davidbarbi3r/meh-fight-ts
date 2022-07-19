@@ -6,10 +6,10 @@ export interface CardsProps {
   action: (card: CardModel) => void;
 }
 
-export function Cards(props: CardsProps) {
+export function Cards({cards, action}: CardsProps) {
   return (
     <div className="card-rack">
-      {props.cards.map((card) => (
+      {cards.map((card) => (
         <div
           style={{
             backgroundColor:
@@ -26,10 +26,10 @@ export function Cards(props: CardsProps) {
                 : "1px solid black",
           }}
           className="card"
-          onClick={() => props.action(card)}
+          onClick={() => action(card)}
           key={card.id}
         >
-          <h3>{card.name}</h3>
+          <h3 className="card-title">{card.name}</h3>
           <ul className="cards-specs">
             <li>
               {card.type === "Attack"
@@ -37,8 +37,8 @@ export function Cards(props: CardsProps) {
                 : "Def: " + card.protection}
             </li>
             <li>{"Cost: " + card.cost}</li>
-            <li>{card.rarity}</li>
           </ul>
+          <p className="rarity">{card.rarity === 1 ? "⚫" : card.rarity === 2 ? "⬛" : "🔶"}</p>
         </div>
       ))}
     </div>

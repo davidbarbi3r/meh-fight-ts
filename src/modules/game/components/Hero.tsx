@@ -8,11 +8,11 @@ interface HeroProps {
 function Hero(props: HeroProps) {
   return (
     <div className="char">
-      <h2>{props.hero.name}</h2>
+      {/* <h2>{props.hero.name}</h2> */}
       <div className="char-container">
         <div className="char-meh">
           <img
-            src={`./images/heros/${props.hero.img}`}
+            src={`${props.hero.img}`}
             alt={`${props.hero.name}`}
             className="char-img"
           ></img>

@@ -1,7 +1,17 @@
-function EndGame() {
+import Header from "../../layout/components/Header";
+import Footer from "../../layout/components/Footer";
+import "../../style/EndGame.css"
+
+interface EndGameProps {
+    heroHp: number
+}
+
+function EndGame({heroHp}:EndGameProps) {
     return (
-        <div>
-            <h1>GAME OVER</h1>
+        <div className="App">
+            <Header/>
+            <h1 className="End-message">{heroHp === 0 ? '☠ Loooser ☠' : 'Congratulation you Wins 🎊'}</h1>
+            <Footer/>
         </div>
     );
 }

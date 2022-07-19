@@ -6,6 +6,10 @@ footer {
     background-color: beige;
 }
 
+footer div {
+    display: flex;
+}
+
 footer p {
     display: flex;
     justify-content: space-around;
