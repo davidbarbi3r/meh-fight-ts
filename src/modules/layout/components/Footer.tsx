@@ -1,4 +1,4 @@
-function Footer() {
+export default function Footer() {
   const style = {
     backgroundColor: "#dazdgffd",
   };

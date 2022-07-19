@@ -1,3 +1,5 @@
+import Header from "../../layout/components/Header";
+import Footer from "../../layout/components/Footer";
 import "../../style/Intro.css"
 
 function Intro(props: any) {
@@ -26,12 +28,14 @@ function Intro(props: any) {
   );
   return (
     <div>
+      <Header/>
       <section className="game-starter">
         <section className="game-starter-charSelection">{heroImgHtml}</section>
         <button className="std-btn" onClick={props.startGame}>
           Start Game
         </button>
       </section>
+      <Footer/>
     </div>
   );
 }
