@@ -3,7 +3,6 @@
 
 /* To be implemented : 
   - Crit / Missed / normal dmg with attack cards,
-  - Loot when an Enemy is dead (card ? object ? gold ?),
   - multiple enemies in same fight ? 
   - Fight animations
 */

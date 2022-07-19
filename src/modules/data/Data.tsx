@@ -28,6 +28,7 @@ export interface EnemyModel {
   miss: number;
   dmgCalcul(arg0: number): number;
   attack: (random: number) => number;
+  loot: CardModel[];
 }
 
 export interface CardModel {
@@ -58,7 +59,7 @@ class Hero implements HeroModel {
   ) {}
 }
 
-class Ennemy implements EnemyModel {
+class Enemy implements EnemyModel {
   constructor(
     public id: string,
     public name: string,
@@ -68,7 +69,8 @@ class Ennemy implements EnemyModel {
     public img: string,
     public crit: number, //increase crit probability
     public critDmg: number, //increase crit damages
-    public miss: number //increase missed attack probability
+    public miss: number, //increase missed attack probability
+    public loot: CardModel[]
   ) {}
 
   public attack = this.dmgCalcul;
@@ -116,9 +118,11 @@ export let heroArray: HeroModel[] = [
 ];
 
 export let enemiesArray: EnemyModel[] = [
-  new Ennemy(nanoid(8), "Dog", 25, 10, 0, "dog.png", 10, 10, 10),
-  new Ennemy(nanoid(8), "Clown", 65, 5, 0, "clown.png", 20, 5, 10),
-  new Ennemy(nanoid(8), "Orc", 100, 5, 0, "orc.png", 50, 5, 20),
+  new Enemy(nanoid(8), "Dog", 25, 10, 0, "dog.png", 10, 10, 10, 
+  [new Card(nanoid(8), "Bite", "Attack", "*", 30, 0, 15, 2),
+   new Card(nanoid(8), "Waaaf", "Defense", "*", 0, 2, 4, 1)]),
+  new Enemy(nanoid(8), "Clown", 65, 5, 0, "clown.png", 20, 5, 10, []),
+  new Enemy(nanoid(8), "Orc", 100, 5, 0, "orc.png", 50, 5, 20, []),
 ];
 
 shuffle(enemiesArray);

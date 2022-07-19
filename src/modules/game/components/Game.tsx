@@ -1,7 +1,5 @@
 import { useState } from "react";
 import "../../style/Game.css";
-import Header from "../../layout/components/Header";
-import Hero from "./Hero";
 import Intro from "./Intro";
 import {
   CardModel,
@@ -10,19 +8,20 @@ import {
   heroArray,
   HeroModel,
 } from "../../data/Data";
-import { getDeck } from "../helpers/Utils";
-import Enemy from "./Enemy";
-import Cards from "./Cards";
+import { getDeck, shuffle } from "../helpers/Utils";
+import { gameStatus } from "../types/GameTypes";
+import BattleGround from "./BattleGround";
+import SelectLoot from "./SelectLoot";
+import EndGame from "./EndGame";
 
 function Game() {
-  const [isGameStarted, setIsGameStarted] = useState(false);
+  const [gameState, setGameState] = useState(gameStatus.intro);
   const [heroSelected, setHeroSelected] = useState<HeroModel>(heroArray[0]);
   const [enemies, setEnemies] = useState<EnemyModel[]>(enemiesArray);
   const [currentEnemy, setCurrentEnemy] = useState<EnemyModel>(enemiesArray[0]);
-  const [deck, setDeck] = useState<CardModel[]>([]);
+  const [deck, setDeck] = useState<CardModel[]>(getDeck);
   const [hand, setHand] = useState<CardModel[]>([]);
   const [discardPile, setDiscardPile] = useState<CardModel[]>([]);
-  const [isFighting, setIsFighting] = useState(false);
   const [turnCount, setTurnCount] = useState(0);
 
   const selectHero = (id: string) => {
@@ -30,18 +29,30 @@ function Game() {
     setHeroSelected(hero);
   };
 
+  const selectCard = (cardselected: CardModel) => {
+    const card = currentEnemy.loot.filter((card) => card === cardselected)[0]
+    setDeck(prev => [...prev, card])
+    const newEnemy = enemies.pop();
+    setHeroSelected((prev) => {
+      return { ...prev, mana: heroArray[0].mana, defense: 0 };
+    });
+    setCurrentEnemy(newEnemy ? newEnemy : currentEnemy);
+    // setDiscardPile((prev) => [...prev, ...hand]);
+    drawCards();
+    setGameState(gameStatus.fighting)
+  }
+
   const startFight = (deck: CardModel[]): void => {
     let hand: CardModel[] = deck.splice(0, heroSelected.handSize);
     setEnemies(enemies.splice(1));
-    setIsFighting(true);
     setHand(hand);
     setTurnCount((prev) => prev++);
   };
 
   function startGame(): void {
     if (heroSelected) {
-      setIsGameStarted(true);
-      setDeck(getDeck);
+      startFight(deck)
+      setGameState(gameStatus.fighting);
     } else {
       window.alert("You must select a Hero");
       throw new Error("You must select a Hero");
@@ -49,19 +60,18 @@ function Game() {
   }
 
   const resetGame = (): void => {
-    setIsGameStarted(false);
+    setGameState(gameStatus.intro);
   };
 
   const drawCards = (): void => {
-    let hand: CardModel[] = [];
-    if (deck.length > heroSelected.handSize) {
-      hand = deck.splice(0, heroSelected.handSize);
-    } else {
+    if (deck.length < heroSelected.handSize) {
+      setDiscardPile((prev) => [...prev, ...deck, ...hand])
       setDeck((prev) => [...prev, ...discardPile]);
       setDiscardPile([]);
-      hand = deck.splice(0, heroSelected.handSize);
-    }
-    setHand(hand);
+      setDeck(prev => shuffle(prev))}
+    setDiscardPile((prev) => [...prev, ...hand]);
+    let newHand = deck.splice(0, heroSelected.handSize);
+    setHand(newHand);
   };
 
   const useCard = (card: CardModel): void => {
@@ -105,17 +115,9 @@ function Game() {
     const rand = Math.random();
     const enemyDmg: number = currentEnemy.attack(rand);
     if (currentEnemy.hp === 0) {
-      //set new current enemy
-      const newEnemy = enemies.pop();
-      setHeroSelected((prev) => {
-        return { ...prev, mana: heroArray[0].mana, defense: 0 };
-      });
-      setCurrentEnemy(newEnemy ? newEnemy : currentEnemy);
-      setDiscardPile((prev) => [...prev, ...hand]);
-      drawCards();
+      setGameState(gameStatus.enemyDead)
     } else {
       setTimeout(() => {
-        setDiscardPile((prev) => [...prev, ...hand]);
         setHeroSelected((prev) => {
           return heroSelected.defense
             ? enemyDmg <= heroSelected.defense
@@ -129,50 +131,36 @@ function Game() {
             : { ...prev, hp: prev.hp - enemyDmg, mana: heroArray[0].mana };
         });
         drawCards();
-      }, 2000);
+        setEnemies(enemies.splice(1));
+      }, 1500);
     }
-
     console.log(turnCount);
   };
 
-  const gameHtml = isGameStarted ? (
-    <div className="game-content">
-      <Header resetGame={resetGame} />
-      <section className="App-game-container">
-        <div className="App-game-players-container">
-          <h1>
-            <Hero hero={heroSelected} />
-          </h1>
-          <h1>
-            <Enemy enemies={currentEnemy} />
-          </h1>
-        </div>
-        <div className="App-game-card-container">
-          {isFighting ? (
-            <div className="App-game-hand-container">
-              <Cards cards={hand} useCard={useCard} />
-              <button className="std-btn btn-end" onClick={endTurn}>
-                End turn
-              </button>
-            </div>
-          ) : (
-            <button className="std-btn" onClick={() => startFight(deck)}>
-              Fight
-            </button>
-          )}
-        </div>
-      </section>
-    </div>
-  ) : (
+  const gameHtml = gameState === gameStatus.intro?
     <Intro
-      startGame={startGame}
-      heroArray={heroArray}
-      selectHero={selectHero}
-      isGameStarted={isGameStarted}
-    />
-  );
+    startGame={startGame}
+    heroArray={heroArray}
+    selectHero={selectHero}
+    gameState={gameState}
+  /> : 
+  gameState === gameStatus.fighting ? 
+    <BattleGround
+    resetGame={resetGame}
+    heroSelected={heroSelected}
+    currentEnemy={currentEnemy}
+    hand={hand}
+    useCard={useCard}
+    endTurn={endTurn}
+    discardPile={discardPile.length}
+    deck={deck.length}/> :
+  gameState === gameStatus.enemyDead ?
+    <SelectLoot
+    cards={currentEnemy.loot}
+    action={selectCard}/> : 
+    <EndGame/>
 
-  return <div>{gameHtml}</div>;
+  return (<div>{gameHtml}</div>);
 }
 
 export default Game;

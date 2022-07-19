@@ -1,12 +1,12 @@
 import { CardModel } from "../../data/Data";
 import "../../style/Cards.css";
 
-interface CardsProps {
+export interface CardsProps {
   cards: CardModel[];
-  useCard: (card: CardModel) => void;
+  action: (card: CardModel) => void;
 }
 
-function Cards(props: CardsProps) {
+export function Cards(props: CardsProps) {
   return (
     <div className="card-rack">
       {props.cards.map((card) => (
@@ -26,7 +26,7 @@ function Cards(props: CardsProps) {
                 : "1px solid black",
           }}
           className="card"
-          onClick={() => props.useCard(card)}
+          onClick={() => props.action(card)}
           key={card.id}
         >
           <h3>{card.name}</h3>
@@ -44,5 +44,3 @@ function Cards(props: CardsProps) {
     </div>
   );
 }
-
-export default Cards;
