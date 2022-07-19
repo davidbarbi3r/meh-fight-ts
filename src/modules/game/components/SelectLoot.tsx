@@ -1,22 +1,21 @@
-import { findByLabelText } from "@testing-library/react";
-import { CardModel } from "../../data/Data";
 import {Cards, CardsProps} from "./Cards";
+import Header from "../../layout/components/Header";
+import Footer from "../../layout/components/Footer";
+import "../../style/LootSelection.css"
 
 
 function SelectLoot({cards, action}:CardsProps) {
 
-    const style = {
-        paddingTop: "10rem",
-        margin: "0 auto",
-        display: "column"
-    }
-
-    return (
-        <div className="Loot-container" style={style}>
-            <Cards
-            cards={cards}
-            action={action}/>
-            <button className="std-btn">Continue fighting</button>
+     return (
+        <div className="App">
+            <Header/>
+            <h1 className="Loot-title">Select a loot</h1>
+            <div className="Loot-container">
+                <Cards
+                cards={cards}
+                action={action}/>
+            </div>
+            <Footer/>
         </div>
     );
 }
