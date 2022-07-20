@@ -22,7 +22,7 @@
 
 .char-img {
     width: 20rem;
-    border: inset 2px black;
+    border: solid 3px black;
     border-radius: 15%;
     margin: 0 auto; 
 }
@@ -32,10 +32,23 @@
     top: -20px;
     font-weight: bold;
     left: -15px;
-    border: 2px inset black;
+    border: 4px groove black;
     text-align: left;
     padding: 0.3rem;
     margin: 0;
     border-radius: 15%;
     background-color: bisque;
 }
+
+.fighting {
+    border: 3px solid red;
+    box-shadow: -5px 5px 15px 5px rgba(0, 0, 0, 0.603);}
+
+.def {
+    border: 4px dashed rgb(0, 153, 255);
+}
+  
+  @keyframes fadeInAnimation {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+  }

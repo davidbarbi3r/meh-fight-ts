@@ -1,6 +1,7 @@
 export enum gameStatus {
     intro = "Intro",
-    fighting = "Fighting",
+    Efighting = "EFighting",
+    Hfighting = "HFighting",
     enemyDead = "ObjectSelection",
     endGame = "EndGame",
   }

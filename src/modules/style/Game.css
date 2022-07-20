@@ -11,6 +11,7 @@
   
   .App-game-container {
     margin: 0 auto;
+    animation: fadeInAnimation 2s;
   }
   
   .App-game-players-container{

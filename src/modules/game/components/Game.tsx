@@ -23,26 +23,26 @@ function Game() {
   const [hand, setHand] = useState<CardModel[]>([]);
   const [discardPile, setDiscardPile] = useState<CardModel[]>([]);
   const [turnCount, setTurnCount] = useState(0);
-  const [heroMana, setHeroMana] = useState(0)
+  const [heroMana, setHeroMana] = useState(0);
 
   const selectHero = (id: string) => {
     const hero = heroArray.filter((hero) => hero.id === id)[0];
-    setHeroMana(hero.mana)
+    setHeroMana(hero.mana);
     setHeroSelected(hero);
   };
 
   const selectCard = (cardselected: CardModel) => {
-    const card = currentEnemy.loot.filter((card) => card === cardselected)[0]
+    const card = currentEnemy.loot.filter((card) => card === cardselected)[0];
     const newEnemy = enemies.pop();
     setCurrentEnemy(newEnemy ? newEnemy : currentEnemy);
-    setDeck(prev => [...prev, card])
+    setDeck((prev) => [...prev, card]);
     setHeroSelected((prev) => {
       return { ...prev, mana: heroMana, defense: 0 };
     });
     // setDiscardPile((prev) => [...prev, ...hand]);
     drawCards();
-    setGameState(gameStatus.fighting)
-  }
+    setGameState(gameStatus.Hfighting);
+  };
 
   const startFight = (deck: CardModel[]): void => {
     let hand: CardModel[] = deck.splice(0, heroSelected.handSize);
@@ -53,8 +53,8 @@ function Game() {
 
   function startGame(): void {
     if (heroSelected) {
-      startFight(deck)
-      setGameState(gameStatus.fighting);
+      startFight(deck);
+      setGameState(gameStatus.Hfighting);
     } else {
       window.alert("You must select a Hero");
       throw new Error("You must select a Hero");
@@ -67,19 +67,18 @@ function Game() {
 
   const drawCards = (): void => {
     if (deck.length < heroSelected.handSize) {
-      setDiscardPile((prev) => [...prev, ...deck, ...hand])
+      setDiscardPile((prev) => [...prev, ...deck, ...hand]);
       setDeck((prev) => [...prev, ...discardPile]);
       setDiscardPile([]);
-      setDeck(prev => shuffle(prev))}
+      setDeck((prev) => shuffle(prev));
+    }
     setDiscardPile((prev) => [...prev, ...hand]);
-    shuffle(deck)
+    shuffle(deck);
     let newHand = deck.splice(0, heroSelected.handSize);
     setHand(newHand);
   };
 
   const useCard = (card: CardModel): void => {
-    console.log("mana" + heroMana)
-
     if (currentEnemy.hp === 0) {
       alert("Enemy is dead, end turn.");
     } else if (heroSelected.mana - card.cost < 0) {
@@ -120,16 +119,19 @@ function Game() {
     const rand = Math.random();
     const enemyDmg: number = currentEnemy.attack(rand);
     if (currentEnemy.hp === 0) {
-      enemies.length ? 
-      setGameState(gameStatus.enemyDead) : 
-      setGameState(gameStatus.endGame)
+      enemies.length
+        ? setGameState(gameStatus.enemyDead)
+        : setGameState(gameStatus.endGame);
     } else if (heroSelected.defense + heroSelected.hp <= enemyDmg) {
-      setHeroSelected((prev) => {return {
-        ...prev, 
-        hp: 0
-      }})
-      setGameState(gameStatus.endGame)
-    } else{
+      setHeroSelected((prev) => {
+        return {
+          ...prev,
+          hp: 0,
+        };
+      });
+      setGameState(gameStatus.endGame);
+    } else {
+      setGameState(gameStatus.Efighting);
       setTimeout(() => {
         setHeroSelected((prev) => {
           return heroSelected.defense
@@ -144,36 +146,38 @@ function Game() {
             : { ...prev, hp: prev.hp - enemyDmg, mana: heroMana };
         });
         drawCards();
+        setGameState(gameStatus.Hfighting);
       }, 1500);
     }
-    console.log(turnCount);
   };
 
-  const gameHtml = gameState === gameStatus.intro?
-    <Intro
-    startGame={startGame}
-    heroArray={heroArray}
-    selectHero={selectHero}
-    gameState={gameState}
-  /> : 
-  gameState === gameStatus.fighting ? 
-    <BattleGround
-    resetGame={resetGame}
-    heroSelected={heroSelected}
-    currentEnemy={currentEnemy}
-    hand={hand}
-    useCard={useCard}
-    endTurn={endTurn}
-    discardPile={discardPile.length}
-    deck={deck.length}/> :
-  gameState === gameStatus.enemyDead ?
-    <SelectLoot
-    cards={currentEnemy.loot}
-    action={selectCard}/> : 
-    <EndGame
-    heroHp={heroSelected.hp}/>
+  const gameHtml =
+    gameState === gameStatus.intro ? (
+      <Intro
+        startGame={startGame}
+        heroArray={heroArray}
+        selectHero={selectHero}
+        gameState={gameState}
+      />
+    ) : gameState === gameStatus.endGame ? (
+      <EndGame heroHp={heroSelected.hp} />
+    ) : gameState === gameStatus.enemyDead ? (
+      <SelectLoot cards={currentEnemy.loot} action={selectCard} />
+    ) : (
+      <BattleGround
+      resetGame={resetGame}
+      heroSelected={heroSelected}
+      currentEnemy={currentEnemy}
+      hand={hand}
+      useCard={useCard}
+      endTurn={endTurn}
+      discardPile={discardPile.length}
+      deck={deck.length}
+      gameState={gameState}
+    />
+    );
 
-  return (<div>{gameHtml}</div>);
+  return <div>{gameHtml}</div>;
 }
 
 export default Game;

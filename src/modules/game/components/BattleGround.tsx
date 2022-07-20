@@ -4,6 +4,7 @@ import { Cards } from "./Cards";
 import Hero from "./Hero";
 import Enemy from "./Enemy";
 import { CardModel, EnemyModel, HeroModel } from "../../data/Data";
+import { gameStatus } from "../types/GameTypes";
 
 interface BattleGroundProps {
   resetGame: () => void;
@@ -14,6 +15,7 @@ interface BattleGroundProps {
   endTurn: () => void;
   discardPile: number;
   deck: number;
+  gameState: gameStatus;
 }
 
 function BattleGround({
@@ -25,14 +27,15 @@ function BattleGround({
   endTurn,
   discardPile,
   deck,
+  gameState,
 }: BattleGroundProps) {
   return (
     <div className="App">
       <Header resetGame={resetGame} />
       <section className="App-game-container">
         <div className="App-game-players-container">
-          <Hero hero={heroSelected} />
-          <Enemy enemies={currentEnemy} />
+          <Hero hero={heroSelected} gameState={gameState} />
+          <Enemy enemies={currentEnemy} gameState={gameState} />
         </div>
         <div className="App-game-card-container">
           <div className="App-game-hand-container">
