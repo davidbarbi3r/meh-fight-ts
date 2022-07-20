@@ -4,7 +4,7 @@ import Footer from "../../layout/components/Footer";
 import "../../style/LootSelection.css"
 
 
-function SelectLoot({cards, action}:CardsProps) {
+function SelectLoot({cards, action, gameState}:CardsProps) {
 
      return (
         <div className="App">
@@ -13,7 +13,8 @@ function SelectLoot({cards, action}:CardsProps) {
             <div className="Loot-container">
                 <Cards
                 cards={cards}
-                action={action}/>
+                action={action}
+                gameState={gameState}/>
             </div>
             <Footer/>
         </div>

@@ -11,6 +11,7 @@ function Enemy({enemies, gameState}: EnemyProps) {
 
   const classStyle = gameState === gameStatus.Efighting ? "char-img fighting" : "char-img" 
 
+
   return (
     <div className="char">
       {/* <h2>{enemies.name}</h2> */}

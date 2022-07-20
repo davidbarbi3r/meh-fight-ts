@@ -51,3 +51,8 @@ ul li {
 .rarity {
     margin: 0 auto;
 }
+
+.disabled {
+    opacity: 0.7;
+    pointer-events: none;
+}

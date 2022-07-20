@@ -78,11 +78,13 @@ function Game() {
     setHand(newHand);
   };
 
-  const useCard = (card: CardModel): void => {
+  const useCard = (card: CardModel): string => {
     if (currentEnemy.hp === 0) {
       alert("Enemy is dead, end turn.");
+      return "Enemy is dead"
     } else if (heroSelected.mana - card.cost < 0) {
       alert("Not enought mana, pick an other card or end turn");
+      return "Not enought mana"
     } else if (card.type === "Defense") {
       setDiscardPile((prev) => [...prev, card]);
       setHeroSelected((prev) => {
@@ -93,6 +95,7 @@ function Game() {
         };
       });
       setHand(hand.filter((item) => item.id !== card.id));
+      return card.effect
     } else {
       if (currentEnemy.hp - card.damage <= 0) {
         setHeroSelected((prev) => {
@@ -112,6 +115,7 @@ function Game() {
         });
         setHand(hand.filter((item) => item.id !== card.id));
       }
+      return card.effect
     }
   };
 
@@ -162,7 +166,7 @@ function Game() {
     ) : gameState === gameStatus.endGame ? (
       <EndGame heroHp={heroSelected.hp} />
     ) : gameState === gameStatus.enemyDead ? (
-      <SelectLoot cards={currentEnemy.loot} action={selectCard} />
+      <SelectLoot cards={currentEnemy.loot} action={selectCard} gameState={gameState} />
     ) : (
       <BattleGround
       resetGame={resetGame}

@@ -1,14 +1,20 @@
+import { isDisabled } from "@testing-library/user-event/dist/utils";
 import { CardModel } from "../../data/Data";
 import "../../style/Cards.css";
+import { gameStatus } from "../types/GameTypes";
 
 export interface CardsProps {
   cards: CardModel[];
   action: (card: CardModel) => void;
+  gameState: gameStatus;
 }
 
-export function Cards({cards, action}: CardsProps) {
+export function Cards({ cards, action, gameState }: CardsProps) {
+  const className =
+    gameState === gameStatus.Efighting ? "card-rack disabled" : "card-rack";
+
   return (
-    <div className="card-rack">
+    <div className={className}>
       {cards.map((card) => (
         <div
           style={{
@@ -38,7 +44,9 @@ export function Cards({cards, action}: CardsProps) {
             </li>
             <li>{"Cost: " + card.cost}</li>
           </ul>
-          <p className="rarity">{card.rarity === 1 ? "⚫" : card.rarity === 2 ? "⬛" : "🔶"}</p>
+          <p className="rarity">
+            {card.rarity === 1 ? "⚫" : card.rarity === 2 ? "⬛" : "🔶"}
+          </p>
         </div>
       ))}
     </div>
