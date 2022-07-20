@@ -54,17 +54,19 @@ To get a local copy up and running follow these simple example steps.
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Add cards loots after enemy killed
-- [ ] Add some styling
-- [ ] Add script to enemies (for the moment they just Attack)
-- [ ] Add : use Hero & Enemies stats for damage calculs / crit etc ...
+- [X] Add cards loots after enemy killed
+- [X] Add some styling
+- [X] Add script to enemies (for the moment they just Attack)
+- [X] Add : use Enemies stats for damage calculs / crit etc ...
+- [ ] Add : use Hero stats for damage calculs / crit etc ...
 - [ ] Add objects loot to increase / decrease stats
 - [ ] Add save option
 - [ ] Add Responsive
 
 
 - [ ] Fix known bugs
-  - [ ] Game doesn't stop when all enemies are dead
+  - [X] Game doesn't stop when all enemies are dead
+  - [X] Disable card rack & button when it's Enemy turn
   - [ ] When I keep refreshing with 5 cards I get some new cards in my hand  
 
 
