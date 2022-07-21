@@ -11,6 +11,10 @@
     border: 1px solid rgba(240, 248, 255, 0);
   }
 
+  .game-starter .game-starter-charSelection {
+    margin: 0;
+}
+
   .card-rack {
     max-width: fit-content;
   }
@@ -18,10 +22,6 @@
   .card {
     max-width: 30px;
     width: 100%;
-  }
-
-  .App-game-players-container {
-    flex-direction: column;
   }
 
   .App-game-players-container .hero {
@@ -32,6 +32,7 @@
     font-size: 0.8rem;
   }
 }
+
 
 @media (max-width: 675px) {
   .App {
@@ -44,3 +45,55 @@
     font-size: 0.6rem;
   }
 }
+
+@media (max-width: 500px) {
+    .App-game-players-container{
+        flex-direction: column;
+    }
+    .char-img {
+        max-height: 160px;
+    }
+
+  }
+
+@media(orientation: landscape) and (max-height: 800px){
+    .App {
+        font-size: 0.7rem;
+    }
+    .App-game-hand-container .btn-end {
+        font-size: 0.7rem;
+        margin-top: 6em;
+      }
+
+    header .std-btn {
+    font-size: 0.7rem;
+    }
+
+    .game-starter-charSelection {
+        margin: 0;
+    }
+
+    .game-starter .std-btn{
+        font-size: 0.7rem;
+        margin-top: 0em;
+    }
+
+    .game-starter-charSelection {
+        max-width: 70%;
+    }
+
+    .Stats p {
+        font-size: 0.7em;
+    }
+
+    .App-game-players-container {
+        flex-direction: row;
+      }
+
+    header h1 {
+        margin: 0;
+    }
+
+   
+}
+
