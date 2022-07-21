@@ -25,17 +25,22 @@ function Game() {
   const [discardPile, setDiscardPile] = useState<CardModel[]>([]);
   const [turnCount, setTurnCount] = useState(0);
   const [heroMana, setHeroMana] = useState(0);
+  const [lastCard, setLastCard] = useState<CardModel>(deck[0])
+  const [enemyInitialStats, setEnemyInitialStats] = useState(enemiesArray[0])
+  const [heroInitalStats, setHeroInitialStats] = useState(heroArray[0])
 
   const selectHero = (id: string) => {
     const hero = heroArray.filter((hero) => hero.id === id)[0];
     setHeroMana(hero.mana);
     setHeroSelected(hero);
+    setHeroInitialStats(hero);
   };
 
   const selectCard = (cardselected: CardModel) => {
     const card = currentEnemy.loot.filter((card) => card === cardselected)[0];
     const newEnemy = enemies.pop();
-    setCurrentEnemy(newEnemy ? newEnemy : currentEnemy);
+    newEnemy && setCurrentEnemy(newEnemy);
+    newEnemy && setEnemyInitialStats(newEnemy);
     setDeck((prev) => [...prev, card]);
     setHeroSelected((prev) => {
       return { ...prev, mana: heroMana, defense: 0 };
@@ -80,6 +85,7 @@ function Game() {
   };
 
   const useCard = (card: CardModel): string => {
+    setLastCard(card)
     if (currentEnemy.hp === 0) {
       alert("Enemy is dead, end turn.");
       return "Enemy is dead"
@@ -92,7 +98,7 @@ function Game() {
         return {
           ...prev,
           mana: prev.mana - card.cost,
-          defense: card.protection,
+          defense: prev.defense + card.protection,
         };
       });
       setHand(hand.filter((item) => item.id !== card.id));
@@ -167,7 +173,7 @@ function Game() {
     ) : gameState === gameStatus.endGame ? (
       <EndGame heroHp={heroSelected.hp} />
     ) : gameState === gameStatus.enemyDead ? (
-      <SelectLoot cards={currentEnemy.loot} action={selectCard} gameState={gameState} />
+      <SelectLoot cards={currentEnemy.loot} action={selectCard} gameState={gameState} hero={heroSelected} />
     ) : (
       <BattleGround
       resetGame={resetGame}
@@ -179,6 +185,7 @@ function Game() {
       discardPile={discardPile.length}
       deck={deck.length}
       gameState={gameState}
+      lastCard={lastCard}
     />
     );
 

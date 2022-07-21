@@ -1,4 +1,4 @@
-import { CardModel } from "../../data/Data";
+import { CardModel, HeroModel } from "../../data/Data";
 import "../../style/Cards.css";
 import { gameStatus } from "../types/GameTypes";
 
@@ -6,9 +6,10 @@ export interface CardsProps {
   cards: CardModel[];
   action: (card: CardModel) => void;
   gameState: gameStatus;
+  hero: HeroModel;
 }
 
-export function Cards({ cards, action, gameState }: CardsProps) {
+export function Cards({ cards, action, gameState, hero }: CardsProps) {
   const cardRackClass =
     gameState === gameStatus.Efighting ? "card-rack disabled" : "card-rack";
 
@@ -29,6 +30,8 @@ export function Cards({ cards, action, gameState }: CardsProps) {
                 : card.rarity === 3
                 ? "3px solid red"
                 : "1px solid black",
+            cursor: gameState === gameStatus.Hfighting ? card.cost > hero.mana ? "not-allowed" : "pointer" : "pointer",
+            opacity: gameState === gameStatus.Hfighting ? card.cost > hero.mana ? 0.7 : 1 : 1,
           }}
           className="card"
           onClick={() => action(card)}

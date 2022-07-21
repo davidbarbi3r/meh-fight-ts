@@ -4,7 +4,6 @@
     color: black;
     max-width: 1200px;
     margin-top: 6.5em;
-    border: 1px solid green;
 }
 
 .card {
@@ -34,8 +33,9 @@
 
 .card:hover,
 .card:focus{
-  cursor: pointer;
   transform: translateY(-2em);
+  margin-right: 1em;
+  cursor: pointer;
 }
 
 ul {

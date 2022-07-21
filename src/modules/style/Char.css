@@ -1,58 +1,116 @@
 .char {
-    margin-right: 1em;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+  margin-right: 1em;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
 }
 
 .char-container {
-    width: auto;
+  width: auto;
 }
 
 .char-meh {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    position: relative;
-    margin: 1em;
-    /* margin: 0 auto; */
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  margin: 1em;
+  /* margin: 0 auto; */
 }
 
 .char-img {
-    max-width: 20em;
-    border: solid 3px black;
-    border-radius: 15%;
-    margin: 0 auto; 
+  max-width: 20em;
+  border: solid 3px black;
+  border-radius: 15%;
+  margin: 0 auto;
+  background-color: rgb(0, 0, 0);
 }
 
 .char-stats {
-    position: absolute;
-    top: -20px;
-    font-weight: bold;
-    left: -15px;
-    border: 4px groove black;
-    text-align: left;
-    padding: 0.3rem;
-    margin: 0;
-    border-radius: 15%;
-    background-color: bisque;
+  position: absolute;
+  top: -20px;
+  font-weight: bold;
+  left: -15px;
+  border: 4px groove black;
+  text-align: left;
+  padding: 0.3rem;
+  margin: 0;
+  border-radius: 15%;
+  background-color: bisque;
 }
 
 .fighting {
-    border: 3px solid red;
-    box-shadow: -5px 5px 15px 5px rgba(0, 0, 0, 0.603);}
+  border: 3px solid red;
+  box-shadow: -5px 5px 15px 5px rgba(0, 0, 0, 0.603);
+}
 
 .def {
-    border: 4px dashed rgb(0, 153, 255);
+  border: 4px dashed rgb(0, 153, 255);
 }
-  
+
+.char-msg {
+  position: absolute;
+  top: -2em;
+  transform: rotate(20deg);
+  font-size: 1.5rem;
+  order: 1;
+  color: rgb(255, 8, 8);
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.445);
+  opacity: 0;
+  animation: pop 2s cubic-bezier(0.215, 0.610, 0.355, 1);
+}
+
+.pop {
+  animation: pop 2s normal;
+}
+
+.dead {
+  animation: dead 1s normal;
+  transform: rotate(180deg);
+  opacity: 0.7;
+  background-blend-mode: darken;
+}
+
+@keyframes dead {
+  from {
+    transform: rotate(0deg);
+    opacity: 1;
+  }
+  to {
+    transform: rotate(180deg);
+    opacity: 0.5;
+  }
+}
+
 @keyframes fadeInAnimation {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes shake {
-    from { transform: translateX(-10px);}
-    to { transform: translateX(10px);}
+  from {
+    transform: translateX(-10px);
+  }
+  to {
+    transform: translateX(10px);
+  }
+}
+
+@keyframes pop {
+  0% {
+    opacity: 1;
+  }
+
+  10% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
 }

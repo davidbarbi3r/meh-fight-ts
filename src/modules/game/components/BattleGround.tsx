@@ -17,6 +17,7 @@ interface BattleGroundProps {
   discardPile: number;
   deck: number;
   gameState: gameStatus;
+  lastCard: CardModel;
 }
 
 function BattleGround({
@@ -28,7 +29,8 @@ function BattleGround({
   endTurn,
   discardPile,
   deck,
-  gameState
+  gameState,
+  lastCard
 }: BattleGroundProps) {
 
   const isDisabled = gameState === gameStatus.Efighting
@@ -39,11 +41,11 @@ function BattleGround({
       <section className="App-game-container">
         <div className="App-game-players-container">
           <Hero hero={heroSelected} gameState={gameState} />
-          <Enemy enemies={currentEnemy} gameState={gameState}/>
+          <Enemy enemy={currentEnemy} gameState={gameState} lastCard={lastCard}/>
         </div>
         <div className="App-game-card-container">
           <div className="App-game-hand-container">
-            <Cards cards={hand} action={useCard}   gameState={gameState}/>
+            <Cards cards={hand} action={useCard}   gameState={gameState} hero={heroSelected}/>
             <button className="std-btn btn-end" onClick={endTurn} disabled={isDisabled}>
               End turn
             </button>
