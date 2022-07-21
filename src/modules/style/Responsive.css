@@ -1,47 +1,46 @@
-@media (max-width: 800px){
-    .App {
-        font-size: 0.8rem;
-    }
-    
-    header .std-btn {
-        font-size: 0.8rem;
-    }
+@media (max-width: 800px) {
+  .App {
+    font-size: 0.8rem;
+  }
 
-    .game-starter-char {
-        border: 1px solid rgba(240, 248, 255, 0);
-      }
+  header .std-btn {
+    font-size: 0.8rem;
+  }
 
-    .card-rack {
-        max-width: fit-content;
-    }
+  .game-starter-char {
+    border: 1px solid rgba(240, 248, 255, 0);
+  }
 
-    .card {
-        max-width: 30px;
-        width: 100%;
-    }
+  .card-rack {
+    max-width: fit-content;
+  }
 
-    .App-game-players-container{
-        flex-direction: column;
-    }
+  .card {
+    max-width: 30px;
+    width: 100%;
+  }
 
-    .App-game-players-container .hero {
-        order: 1;
-    }
+  .App-game-players-container {
+    flex-direction: column;
+  }
 
-    .App-game-hand-container .btn-end {
-        font-size: 0.8rem;
-    }
+  .App-game-players-container .hero {
+    order: 1;
+  }
 
+  .App-game-hand-container .btn-end {
+    font-size: 0.8rem;
+  }
 }
 
-@media (max-width: 675px){
-    .App {
-        font-size: 0.7rem;
-    }
+@media (max-width: 675px) {
+  .App {
+    font-size: 0.7rem;
+  }
 }
 
-@media (max-width: 520px){
-    .App {
-        font-size: 0.6rem;
-    }
+@media (max-width: 520px) {
+  .App {
+    font-size: 0.6rem;
+  }
 }
