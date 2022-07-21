@@ -5,6 +5,7 @@ import Hero from "./Hero";
 import Enemy from "./Enemy";
 import { CardModel, EnemyModel, HeroModel } from "../../data/Data";
 import { gameStatus } from "../types/GameTypes";
+import '../../style/Responsive.css'
 
 interface BattleGroundProps {
   resetGame: () => void;

@@ -9,18 +9,19 @@ header {
   }
   
   .std-btn {
-    padding: 0.5rem 0.75rem;
-    margin: 0 0.5rem;
+    padding: 0.5em 0.75em;
+    margin: 0 0.5em;
     font-size: 1.25rem;
     border: solid 2px black;
-    border-radius: 50px;
+    border-radius: 15px;
     background-color:rgba(219, 111, 9, 0.411) ;
     transition: all 200ms ease-out; 
     font-family: 'Acme', sans-serif;
   }
   
   .btn-end {
-      margin-top: 15%;
+      margin-top: 5em;
+      width: fit-content;
   }
   
   .Header-rack-btn {

@@ -13,7 +13,7 @@ function Hero({hero, gameState}: HeroProps) {
   const classStatsHero = hero.defense > 0 && "def" 
 
   return (
-  <div className="char">
+  <div className="char hero">
       {/* <h2>{hero.name}</h2> */}
       <div className="char-container">
         <div className="char-meh">

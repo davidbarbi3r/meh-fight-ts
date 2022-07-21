@@ -13,7 +13,7 @@ function Enemy({enemies, gameState}: EnemyProps) {
 
 
   return (
-    <div className="char">
+    <div className="char enemy">
       {/* <h2>{enemies.name}</h2> */}
       <div className="char-container">
         <div className="char-meh">

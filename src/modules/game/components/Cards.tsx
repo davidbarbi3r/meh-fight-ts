@@ -1,4 +1,3 @@
-import { isDisabled } from "@testing-library/user-event/dist/utils";
 import { CardModel } from "../../data/Data";
 import "../../style/Cards.css";
 import { gameStatus } from "../types/GameTypes";
@@ -10,11 +9,11 @@ export interface CardsProps {
 }
 
 export function Cards({ cards, action, gameState }: CardsProps) {
-  const className =
+  const cardRackClass =
     gameState === gameStatus.Efighting ? "card-rack disabled" : "card-rack";
 
   return (
-    <div className={className}>
+    <div className={cardRackClass}>
       {cards.map((card) => (
         <div
           style={{

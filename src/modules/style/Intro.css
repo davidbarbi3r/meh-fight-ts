@@ -6,7 +6,7 @@
     justify-content: space-around;
     align-items: center;
     max-height: 50%;
-    max-width: 80%;
+    max-width: 1200px;
     margin: 0 auto;
   }
   
@@ -17,7 +17,7 @@
   
   .game-starter-char {
     border: 5px solid rgba(240, 248, 255, 0);
-    margin: 2em;
+    margin: 0.75em;
     border-radius: 10px;
     padding: 1em;
     transition: all 200ms ease;
@@ -33,6 +33,6 @@
   }
   
   .game-starter-char img {
-    width: 300px;
+    max-width: 100%;
   }
   

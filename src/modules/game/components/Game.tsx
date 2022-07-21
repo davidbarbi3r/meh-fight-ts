@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "../../style/Game.css";
+import "../../style/Responsive.css"
 import Intro from "./Intro";
 import {
   CardModel,
