@@ -18,8 +18,6 @@ What to do:
 -----
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-
 * React
 * Typescript
  
@@ -30,8 +28,6 @@ This section should list any major frameworks/libraries used to bootstrap your p
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
 
 ### Installation
 
@@ -61,12 +57,14 @@ To get a local copy up and running follow these simple example steps.
 - [ ] Add : use Hero stats for damage calculs / crit etc ...
 - [ ] Add objects loot to increase / decrease stats
 - [ ] Add save option
-- [ ] Add Responsive
+- [X] Add Responsive
 
 
 - [ ] Fix known bugs
   - [X] Game doesn't stop when all enemies are dead
   - [X] Disable card rack & button when it's Enemy turn
+  - [ ] The negative black hole, -500mana -1000hp ? No problem...
+  - [ ] Card duplication when setting discard pile as deck
   - [ ] When I keep refreshing with 5 cards I get some new cards in my hand  
 
 
