@@ -3,7 +3,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![mehsCard](https://user-images.githubusercontent.com/96946497/179197704-8a95d36f-ba13-462b-871c-054a4f862711.png)
+![mehsCard-v0-4-4](https://user-images.githubusercontent.com/96946497/181690508-b54b950a-8684-4683-a578-b54f60f4d508.png)
 
 This App is a one page Deck-building card-game. Chose your hero & fight the enemies.
 
@@ -60,12 +60,12 @@ What to do:
 - [X] Add Responsive
 
 
-- [ ] Fix known bugs
+- [X] Fix known bugs
   - [X] Game doesn't stop when all enemies are dead
   - [X] Disable card rack & button when it's Enemy turn
-  - [ ] The negative black hole, -500mana -1000hp ? No problem...
-  - [ ] Card duplication when setting discard pile as deck
-  - [ ] When I keep refreshing with 5 cards I get some new cards in my hand  
+  - [X] The negative black hole, -500mana -1000hp ? No problem...
+  - [X] Card duplication when setting discard pile as deck
+  - [X] When I keep refreshing with 5 cards I get some new cards in my hand  
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
