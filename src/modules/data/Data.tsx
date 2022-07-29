@@ -14,6 +14,7 @@ export interface HeroModel {
   critDmg: number;
   miss: number;
   handSize: number;
+  gold: number;
 }
 
 export interface EnemyModel {
@@ -40,9 +41,8 @@ export interface CardModel {
   protection: number;
   cost: number;
   rarity: 1 | 2 | 3;
-  anim: cardAnim
+  anim: cardAnim;
 }
-
 
 /*--- Classes ---*/
 
@@ -57,7 +57,8 @@ class Hero implements HeroModel {
     public crit: number, //increase crit probability
     public critDmg: number, //increase crit damages
     public miss: number, //increase missed attack probability
-    public handSize: number
+    public handSize: number,
+    public gold: number
   ) {}
 }
 
@@ -89,13 +90,13 @@ class Enemy implements EnemyModel {
 }
 
 enum cardAnim {
-  shake= "shake",
-  redhit="redhit",
-  blackout="blackout",
-  heal="heal",
-  shield="shield",
-  buff="buff",
-  invBuff="invBuff"
+  shake = "shake",
+  redhit = "redhit",
+  blackout = "blackout",
+  heal = "heal",
+  shield = "shield",
+  buff = "buff",
+  invBuff = "invBuff",
 }
 
 class Card implements CardModel {
@@ -125,20 +126,123 @@ class Card implements CardModel {
 /* --- Data Arrays --- */
 
 export let heroArray: HeroModel[] = [
-  new Hero(nanoid(8), "Dumpling", 60, 12, 0, "https://lh3.googleusercontent.com/uOD5AHRwrKRb28S-0M27KjN3e0I39D6-SLEi8t3OyykPXFFdATuXUTXlQEWPy1kyG1UMcnbA4V2wss31JzVIWsIa1rhIu0bxrIg6pg4=s0", 5, 10, 0, 4),
-  new Hero(nanoid(8), "Wizard", 100, 10, 0, "https://lh3.googleusercontent.com/DLTSPz6fjn3v_gMNw5LNokVtgGGlG5WG5LI4xI6braFDyLz3ODcoljHwzzyGwyg77CTgFI-J-6o-R5ZaRsiPjWqhOutyeRNqbyJ9GaU=s0", 0, 20, 0, 5),
-  new Hero(nanoid(8), "ElonMeh", 120, 8, 0, "https://lh3.googleusercontent.com/FTV_NRYx9_dxUJE8qXjzYw1kqvU12FcysKw5dDbDE8OEsNh1_CxWT_pYDMe7fbsyGLO726gTOWw-ekhYS2OwWJcKu8JlyjQRBwrOpw=s0", 30, 5, 5, 6),
+  new Hero(
+    nanoid(8),
+    "Dumpling",
+    60,
+    12,
+    0,
+    "https://lh3.googleusercontent.com/uOD5AHRwrKRb28S-0M27KjN3e0I39D6-SLEi8t3OyykPXFFdATuXUTXlQEWPy1kyG1UMcnbA4V2wss31JzVIWsIa1rhIu0bxrIg6pg4=w600",
+    5,
+    10,
+    0,
+    4,
+    80
+  ),
+  new Hero(
+    nanoid(8),
+    "Wizard",
+    100,
+    10,
+    0,
+    "https://lh3.googleusercontent.com/DLTSPz6fjn3v_gMNw5LNokVtgGGlG5WG5LI4xI6braFDyLz3ODcoljHwzzyGwyg77CTgFI-J-6o-R5ZaRsiPjWqhOutyeRNqbyJ9GaU=w600",
+    0,
+    20,
+    0,
+    5,
+    50
+  ),
+  // new Hero(nanoid(8), "ElonMeh", 120, 8, 0, "https://lh3.googleusercontent.com/FTV_NRYx9_dxUJE8qXjzYw1kqvU12FcysKw5dDbDE8OEsNh1_CxWT_pYDMe7fbsyGLO726gTOWw-ekhYS2OwWJcKu8JlyjQRBwrOpw=w600", 30, 5, 5, 6),
+  new Hero(
+    nanoid(8),
+    "OG meh",
+    120,
+    11,
+    0,
+    "https://lh3.googleusercontent.com/mUHPCSkCjL1zKHklmbDSmK6xz_Z424A2yQuLEqRI9dvTnXrMN4yKMr-_uyzY5T5zH2brAPquw5vIU94J3XMQpejfelzwNSuM6AhK=w600",
+    5,
+    10,
+    10,
+    3,
+    100
+  ),
 ];
 
 export let enemiesArray: EnemyModel[] = [
-  new Enemy(nanoid(8), "Dog", 25, 15, 0, "https://lh3.googleusercontent.com/QKmM5tEsu4WATfR7dVoJdcOlxGiyIdC54ZcW9hOAnnDzoOem3SuhBoLttWwfWfkIktyKF8i4gkhUTxpRUJPQ4gHWp5plqh-n-FpPTA=s0", 10, 100, 10, 
-  [new Card(nanoid(8), "Bite", "Attack", "*", 30, 0, 15, 2, cardAnim.redhit),
-   new Card(nanoid(8), "Waaaf", "Defense", "*", 0, 2, 4, 1, cardAnim.shield)]),
-  new Enemy(nanoid(8), "Clown", 65, 5, 0, "https://lh3.googleusercontent.com/nl211myzjUu7Ly6tu-tFlRyRhBkdbXn18sPa9tVihZTJtN4KiCFNfJ7zcTh99EOi20kJSNyH0FXYsvlY6HiQyfu47vhqRfRPwtX1=s0", 20, 150, 10, 
-  [new Card(nanoid(8), "Megamana", "Utility", "*", 0, 0, -10, 2, cardAnim.buff),
-  new Card(nanoid(8), "Wuuut", "Attack", "*", -10, 0, 0, 1, cardAnim.invBuff)]),
-  new Enemy(nanoid(8), "Orc", 100, 12, 0, "https://lh3.googleusercontent.com/ycSdMY2JiAyv5mVbRmvmo4E0za2TeFJIUNZSGQBSwe3IHSojV3xIEGqcGmmSPtaTkMMP3cn2Jvvo3kpO0vyLAfWAh2UnJSyMcS9LXQ=s0", 50, 50, 20, 
-  [new Card(nanoid(8), "OrcBite", "Attack", "*", 40, 0, 20, 2, cardAnim.shake)]),
+  new Enemy(
+    nanoid(8),
+    "Dog",
+    25,
+    15,
+    0,
+    "https://lh3.googleusercontent.com/QKmM5tEsu4WATfR7dVoJdcOlxGiyIdC54ZcW9hOAnnDzoOem3SuhBoLttWwfWfkIktyKF8i4gkhUTxpRUJPQ4gHWp5plqh-n-FpPTA=s0",
+    10,
+    100,
+    10,
+    [
+      new Card(nanoid(8), "Bite", "Attack", "*", 30, 0, 15, 2, cardAnim.redhit),
+      new Card(nanoid(8), "Waaaf", "Defense", "*", 0, 2, 4, 1, cardAnim.shield),
+    ]
+  ),
+  new Enemy(
+    nanoid(8),
+    "Clown",
+    65,
+    5,
+    0,
+    "https://lh3.googleusercontent.com/nl211myzjUu7Ly6tu-tFlRyRhBkdbXn18sPa9tVihZTJtN4KiCFNfJ7zcTh99EOi20kJSNyH0FXYsvlY6HiQyfu47vhqRfRPwtX1=s0",
+    20,
+    150,
+    10,
+    [
+      new Card(
+        nanoid(8),
+        "Megamana",
+        "Utility",
+        "*",
+        0,
+        0,
+        -10,
+        2,
+        cardAnim.buff
+      ),
+      new Card(
+        nanoid(8),
+        "Wuuut",
+        "Attack",
+        "*",
+        -10,
+        0,
+        0,
+        1,
+        cardAnim.invBuff
+      ),
+    ]
+  ),
+  new Enemy(
+    nanoid(8),
+    "Orc",
+    100,
+    12,
+    0,
+    "https://lh3.googleusercontent.com/ycSdMY2JiAyv5mVbRmvmo4E0za2TeFJIUNZSGQBSwe3IHSojV3xIEGqcGmmSPtaTkMMP3cn2Jvvo3kpO0vyLAfWAh2UnJSyMcS9LXQ=s0",
+    50,
+    50,
+    20,
+    [
+      new Card(
+        nanoid(8),
+        "OrcBite",
+        "Attack",
+        "*",
+        40,
+        0,
+        20,
+        2,
+        cardAnim.shake
+      ),
+    ]
+  ),
 ];
 
 shuffle(enemiesArray);
@@ -147,19 +251,99 @@ export let cardArray: CardModel[] = [
   new Card(nanoid(8), "MEHHHH", "Attack", "*", 10, 0, 5, 1, cardAnim.redhit),
   new Card(nanoid(8), "MEHHHH", "Attack", "*", 10, 0, 5, 1, cardAnim.redhit),
   new Card(nanoid(8), "MEHHHH", "Attack", "*", 10, 0, 5, 1, cardAnim.redhit),
-  new Card(nanoid(8), "ProtectMeh", "Defense", "*", 0, 15, 6, 2, cardAnim.shield),
-  new Card(nanoid(8), "ProtectMeh", "Defense", "*", 0, 15, 6, 2, cardAnim.shield),
+  new Card(
+    nanoid(8),
+    "ProtectMeh",
+    "Defense",
+    "*",
+    0,
+    15,
+    6,
+    2,
+    cardAnim.shield
+  ),
+  new Card(
+    nanoid(8),
+    "ProtectMeh",
+    "Defense",
+    "*",
+    0,
+    15,
+    6,
+    2,
+    cardAnim.shield
+  ),
   new Card(nanoid(8), "Kecece", "Attack", "*", 15, 5, 10, 2, cardAnim.redhit),
   new Card(nanoid(8), "Kecece", "Attack", "*", 15, 5, 10, 2, cardAnim.redhit),
-  new Card(nanoid(8), "UltiMEHHHHH", "Attack", "*", 30, 5, 10, 3, cardAnim.blackout),
+  new Card(
+    nanoid(8),
+    "UltiMEHHHHH",
+    "Attack",
+    "*",
+    30,
+    5,
+    10,
+    3,
+    cardAnim.blackout
+  ),
   new Card(nanoid(8), "HEMMMM", "Defense", "*", 0, 10, 5, 1, cardAnim.shield),
   new Card(nanoid(8), "HEMMMM", "Defense", "*", 0, 10, 5, 1, cardAnim.shield),
   new Card(nanoid(8), "HEMMMM", "Defense", "*", 0, 10, 5, 1, cardAnim.shield),
-  new Card(nanoid(8), "ProtectMeh", "Defense", "*", 0, 10, 5, 1, cardAnim.shield),
-  new Card(nanoid(8), "ProtectMeh", "Defense", "*", 0, 10, 5, 1, cardAnim.shield),
-  new Card(nanoid(8), "ProtectMeh", "Defense", "*", 0, 10, 5, 1, cardAnim.shield),
+  new Card(
+    nanoid(8),
+    "ProtectMeh",
+    "Defense",
+    "*",
+    0,
+    10,
+    5,
+    1,
+    cardAnim.shield
+  ),
+  new Card(
+    nanoid(8),
+    "ProtectMeh",
+    "Defense",
+    "*",
+    0,
+    10,
+    5,
+    1,
+    cardAnim.shield
+  ),
+  new Card(
+    nanoid(8),
+    "ProtectMeh",
+    "Defense",
+    "*",
+    0,
+    10,
+    5,
+    1,
+    cardAnim.shield
+  ),
   new Card(nanoid(8), "ReloadMeh", "Utility", "*", 0, 0, -5, 2, cardAnim.buff),
   new Card(nanoid(8), "ReloadMeh", "Utility", "*", 0, 0, -5, 2, cardAnim.buff),
-  new Card(nanoid(8), "ItsOnlyMeh", "Attack", "*", 15, 0, 10, 1, cardAnim.shake),
-  new Card(nanoid(8), "ItsOnlyMeh", "Attack", "*", 15, 0, 10, 1, cardAnim.shake),
+  new Card(
+    nanoid(8),
+    "ItsOnlyMeh",
+    "Attack",
+    "*",
+    15,
+    0,
+    10,
+    1,
+    cardAnim.shake
+  ),
+  new Card(
+    nanoid(8),
+    "ItsOnlyMeh",
+    "Attack",
+    "*",
+    15,
+    0,
+    10,
+    1,
+    cardAnim.shake
+  ),
 ];

@@ -188,7 +188,9 @@ function Game() {
       <BattleGround
         resetGame={resetGame}
         heroSelected={heroSelected}
+        initalHero={heroInitalStats}
         currentEnemy={currentEnemy}
+        initialEnemy={enemyInitialStats}
         hand={hand}
         useCard={useCard}
         endTurn={endTurn}

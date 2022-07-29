@@ -5,12 +5,14 @@ import Hero from "./Hero";
 import Enemy from "./Enemy";
 import { CardModel, EnemyModel, HeroModel } from "../../data/Data";
 import { gameStatus } from "../types/GameTypes";
-import '../../style/Responsive.css'
+import "../../style/Responsive.css";
 
 interface BattleGroundProps {
   resetGame: () => void;
   heroSelected: HeroModel;
+  initalHero: HeroModel;
   currentEnemy: EnemyModel;
+  initialEnemy: EnemyModel;
   hand: CardModel[];
   useCard: (card: CardModel) => void;
   endTurn: () => void;
@@ -30,23 +32,42 @@ function BattleGround({
   discardPile,
   deck,
   gameState,
-  lastCard
+  lastCard,
+  initalHero,
+  initialEnemy,
 }: BattleGroundProps) {
-
-  const isDisabled = gameState === gameStatus.Efighting
+  const isDisabled = gameState === gameStatus.Efighting;
 
   return (
     <div className="App">
       <Header resetGame={resetGame} />
       <section className="App-game-container">
         <div className="App-game-players-container">
-          <Hero hero={heroSelected} gameState={gameState} />
-          <Enemy enemy={currentEnemy} gameState={gameState} lastCard={lastCard}/>
+          <Hero
+            hero={heroSelected}
+            gameState={gameState}
+            initialHero={initalHero}
+          />
+          <Enemy
+            enemy={currentEnemy}
+            gameState={gameState}
+            lastCard={lastCard}
+            initialEnemy={initialEnemy}
+          />
         </div>
         <div className="App-game-card-container">
           <div className="App-game-hand-container">
-            <Cards cards={hand} action={useCard}   gameState={gameState} hero={heroSelected}/>
-            <button className="std-btn btn-end" onClick={endTurn} disabled={isDisabled}>
+            <Cards
+              cards={hand}
+              action={useCard}
+              gameState={gameState}
+              hero={heroSelected}
+            />
+            <button
+              className="std-btn btn-end"
+              onClick={endTurn}
+              disabled={isDisabled}
+            >
               End turn
             </button>
           </div>

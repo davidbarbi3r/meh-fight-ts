@@ -4,15 +4,25 @@ import { gameStatus } from "../types/GameTypes";
 
 interface EnemyProps {
   enemy: EnemyModel;
+  initialEnemy: EnemyModel;
   gameState: gameStatus;
   lastCard: CardModel;
 }
 
-function Enemy({ enemy, gameState, lastCard }: EnemyProps) {
+function Enemy({ enemy, gameState, lastCard, initialEnemy }: EnemyProps) {
   const classStyle =
     gameState === gameStatus.Efighting ? `char-img fighting ${lastCard.anim}` : "char-img";
 
   const enemyDead = enemy.hp === 0 ? "dead" : ""
+
+  const heathPercent = (enemy.hp / initialEnemy.hp)*100
+
+  const hpBar = {
+    color: "white",
+    width: `${heathPercent}%`,
+    animation: "fadeInAnimation 2s",
+    backgroundColor: "red"
+  };
 
 
   return (
@@ -25,8 +35,10 @@ function Enemy({ enemy, gameState, lastCard }: EnemyProps) {
             alt={enemy.name}
             className={`${classStyle} ${enemyDead}`}
           ></img>
-          <div className="char-stats">
-            <div>{enemy.hp} hp</div>
+          <div className={`char-stats`}>
+            <div className="bar" style={hpBar}>
+            <div>{enemy.hp}</div>
+              <div>❤</div></div>
           </div>
         </div>
       </div>

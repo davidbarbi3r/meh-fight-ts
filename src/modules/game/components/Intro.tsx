@@ -19,9 +19,9 @@ function Intro(props: any) {
       >
         <img src={`${hero.img}`} alt={`${hero.name}`}></img>
         <div className="Stats">
-          <p>Hp: {hero.hp}</p>
-          <p>Mana: {hero.mana}</p>
-          <p>Hand Size: {hero.handSize}</p>
+          <p>Hp: {hero.hp} ❤</p>
+          <p>Mana: {hero.mana} 💧</p>
+          <p>Hand Size: {hero.handSize} 🃏</p>
         </div>
       </button>
     )
