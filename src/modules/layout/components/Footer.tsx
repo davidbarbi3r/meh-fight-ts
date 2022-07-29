@@ -24,7 +24,7 @@ export default function Footer() {
         </p>
       </div>
       <p>
-        V.0.4.4
+        V.0.4.5
       </p>
     </footer>
   );
