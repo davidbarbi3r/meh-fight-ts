@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "../../style/Game.css";
-import "../../style/Responsive.css"
+import "../../style/Responsive.css";
 import Intro from "./Intro";
 import {
   CardModel,
@@ -25,13 +25,12 @@ function Game() {
   const [discardPile, setDiscardPile] = useState<CardModel[]>([]);
   const [turnCount, setTurnCount] = useState(0);
   const [heroMana, setHeroMana] = useState(0);
-  const [lastCard, setLastCard] = useState<CardModel>(deck[0])
-  const [enemyInitialStats, setEnemyInitialStats] = useState(enemiesArray[0])
-  const [heroInitalStats, setHeroInitialStats] = useState(heroArray[0])
+  const [lastCard, setLastCard] = useState<CardModel>(deck[0]);
+  const [enemyInitialStats, setEnemyInitialStats] = useState(enemiesArray[0]);
+  const [heroInitalStats, setHeroInitialStats] = useState(heroArray[0]);
 
   const selectHero = (id: string) => {
     const hero = heroArray.filter((hero) => hero.id === id)[0];
-    setHeroMana(hero.mana);
     setHeroSelected(hero);
     setHeroInitialStats(hero);
   };
@@ -43,10 +42,10 @@ function Game() {
     newEnemy && setEnemyInitialStats(newEnemy);
     setDeck((prev) => [...prev, card]);
     setHeroSelected((prev) => {
-      return { ...prev, mana: heroMana, defense: 0 };
+      return { ...prev, mana: heroInitalStats.mana, defense: 0 };
     });
     // setDiscardPile((prev) => [...prev, ...hand]);
-    drawCards();
+    drawCards(heroSelected.handSize);
     setGameState(gameStatus.Hfighting);
   };
 
@@ -71,27 +70,32 @@ function Game() {
     setGameState(gameStatus.intro);
   };
 
-  const drawCards = (): void => {
-    if (deck.length < heroSelected.handSize) {
-      setDiscardPile((prev) => [...prev, ...deck, ...hand]);
-      setDeck((prev) => [...prev, ...discardPile]);
+  const getNewHand = (number: number): CardModel[] => {
+    const newHand = deck.splice(0, number);
+    return newHand
+  }
+
+  const drawCards = (number: number): void => {
+    if (deck.length <= number) {
+      setDeck((prev) => [...prev, ...discardPile, ...hand]);
       setDiscardPile([]);
       setDeck((prev) => shuffle(prev));
+      setHand(getNewHand(number));
+    } else {
+      setDiscardPile((prev) => [...prev, ...hand]);
+      setDeck((prev) => shuffle(prev));
+      setHand(getNewHand(number));
     }
-    setDiscardPile((prev) => [...prev, ...hand]);
-    shuffle(deck);
-    let newHand = deck.splice(0, heroSelected.handSize);
-    setHand(newHand);
   };
 
   const useCard = (card: CardModel): string => {
-    setLastCard(card)
+    setLastCard(card);
     if (currentEnemy.hp === 0) {
       alert("Enemy is dead, end turn.");
-      return "Enemy is dead"
+      return "Enemy is dead";
     } else if (heroSelected.mana - card.cost < 0) {
       alert("Not enought mana, pick an other card or end turn");
-      return "Not enought mana"
+      return "Not enought mana";
     } else if (card.type === "Defense") {
       setDiscardPile((prev) => [...prev, card]);
       setHeroSelected((prev) => {
@@ -102,7 +106,7 @@ function Game() {
         };
       });
       setHand(hand.filter((item) => item.id !== card.id));
-      return card.effect
+      return card.anim;
     } else {
       if (currentEnemy.hp - card.damage <= 0) {
         setHeroSelected((prev) => {
@@ -112,6 +116,7 @@ function Game() {
           return { ...prev, hp: 0 };
         });
         setDiscardPile((prev) => [...prev, card]);
+        setHand(hand.filter((item) => item.id !== card.id));
       } else {
         setDiscardPile((prev) => [...prev, card]);
         setHeroSelected((prev) => {
@@ -122,11 +127,11 @@ function Game() {
         });
         setHand(hand.filter((item) => item.id !== card.id));
       }
-      return card.effect
+      return card.anim;
     }
   };
 
-  const endTurn = (): void => {
+  const endTurn = () => {
     const rand = Math.random();
     const enemyDmg: number = currentEnemy.attack(rand);
     if (currentEnemy.hp === 0) {
@@ -147,17 +152,17 @@ function Game() {
         setHeroSelected((prev) => {
           return heroSelected.defense
             ? enemyDmg <= heroSelected.defense
-              ? { ...prev, mana: heroMana, defense: 0 }
+              ? { ...prev, mana: heroInitalStats.mana, defense: 0 }
               : {
                   ...prev,
                   hp: prev.hp + heroSelected.defense - enemyDmg,
-                  mana: heroMana,
+                  mana: heroInitalStats.mana,
                   defense: 0,
                 }
-            : { ...prev, hp: prev.hp - enemyDmg, mana: heroMana };
+            : { ...prev, hp: prev.hp - enemyDmg, mana: heroInitalStats.mana };
         });
-        drawCards();
         setGameState(gameStatus.Hfighting);
+        drawCards(heroSelected.handSize);
       }, 1500);
     }
   };
@@ -173,20 +178,25 @@ function Game() {
     ) : gameState === gameStatus.endGame ? (
       <EndGame heroHp={heroSelected.hp} />
     ) : gameState === gameStatus.enemyDead ? (
-      <SelectLoot cards={currentEnemy.loot} action={selectCard} gameState={gameState} hero={heroSelected} />
+      <SelectLoot
+        cards={currentEnemy.loot}
+        action={selectCard}
+        gameState={gameState}
+        hero={heroSelected}
+      />
     ) : (
       <BattleGround
-      resetGame={resetGame}
-      heroSelected={heroSelected}
-      currentEnemy={currentEnemy}
-      hand={hand}
-      useCard={useCard}
-      endTurn={endTurn}
-      discardPile={discardPile.length}
-      deck={deck.length}
-      gameState={gameState}
-      lastCard={lastCard}
-    />
+        resetGame={resetGame}
+        heroSelected={heroSelected}
+        currentEnemy={currentEnemy}
+        hand={hand}
+        useCard={useCard}
+        endTurn={endTurn}
+        discardPile={discardPile.length}
+        deck={deck.length}
+        gameState={gameState}
+        lastCard={lastCard}
+      />
     );
 
   return <div>{gameHtml}</div>;

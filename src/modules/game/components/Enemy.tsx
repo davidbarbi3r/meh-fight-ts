@@ -10,7 +10,7 @@ interface EnemyProps {
 
 function Enemy({ enemy, gameState, lastCard }: EnemyProps) {
   const classStyle =
-    gameState === gameStatus.Efighting ? `char-img fighting ${lastCard.effect}` : "char-img";
+    gameState === gameStatus.Efighting ? `char-img fighting ${lastCard.anim}` : "char-img";
 
   const enemyDead = enemy.hp === 0 ? "dead" : ""
 
