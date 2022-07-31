@@ -72,14 +72,13 @@ function Game() {
 
   const getNewHand = (number: number): CardModel[] => {
     const newHand = deck.splice(0, number);
-    return newHand
-  }
+    return newHand;
+  };
 
   const drawCards = (number: number): void => {
     if (deck.length <= number) {
-      setDeck((prev) => [...prev, ...discardPile, ...hand]);
+      setDeck((prev) => shuffle([...prev, ...discardPile, ...hand]));
       setDiscardPile([]);
-      setDeck((prev) => shuffle(prev));
       setHand(getNewHand(number));
     } else {
       setDiscardPile((prev) => [...prev, ...hand]);
@@ -89,6 +88,7 @@ function Game() {
   };
 
   const useCard = (card: CardModel): string => {
+    const rand = Math.random();
     setLastCard(card);
     if (currentEnemy.hp === 0) {
       alert("Enemy is dead, end turn.");
@@ -107,28 +107,45 @@ function Game() {
       });
       setHand(hand.filter((item) => item.id !== card.id));
       return card.anim;
-    } else {
-      if (currentEnemy.hp - card.damage <= 0) {
-        setHeroSelected((prev) => {
-          return { ...prev, mana: prev.mana - card.cost };
-        });
-        setCurrentEnemy((prev) => {
-          return { ...prev, hp: 0 };
-        });
-        setDiscardPile((prev) => [...prev, card]);
-        setHand(hand.filter((item) => item.id !== card.id));
+    } else if (card.type === "Attack") {
+      //if enemy doesn't dodge the attack
+      if (rand > currentEnemy.dodge / 100) {
+        if (currentEnemy.hp - card.damage <= 0) {
+          setHeroSelected((prev) => {
+            return { ...prev, mana: prev.mana - card.cost };
+          });
+          setCurrentEnemy((prev) => {
+            return { ...prev, hp: 0 };
+          });
+          setDiscardPile((prev) => [...prev, card]);
+          setHand(hand.filter((item) => item.id !== card.id));
+        } else {
+          setDiscardPile((prev) => [...prev, card]);
+          setHeroSelected((prev) => {
+            return { ...prev, mana: prev.mana - card.cost };
+          });
+          setCurrentEnemy((prev) => {
+            return { ...prev, hp: prev.hp - card.damage };
+          });
+          setHand(hand.filter((item) => item.id !== card.id));
+        }
+        return card.anim;
       } else {
         setDiscardPile((prev) => [...prev, card]);
         setHeroSelected((prev) => {
           return { ...prev, mana: prev.mana - card.cost };
         });
-        setCurrentEnemy((prev) => {
-          return { ...prev, hp: prev.hp - card.damage };
-        });
         setHand(hand.filter((item) => item.id !== card.id));
       }
-      return card.anim;
+      return "Attack Dodged";
+    } else if (card.type === "Utility") {
+      setDiscardPile((prev) => [...prev, card]);
+      setHeroSelected((prev) => {
+        return { ...prev, mana: prev.mana - card.cost };
+      });
+      setHand(hand.filter((item) => item.id !== card.id));
     }
+    return card.anim;
   };
 
   const endTurn = () => {

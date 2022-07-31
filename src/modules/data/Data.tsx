@@ -27,6 +27,7 @@ export interface EnemyModel {
   crit: number;
   critDmg: number;
   miss: number;
+  dodge: number;
   dmgCalcul(arg0: number): number;
   attack: (random: number) => number;
   loot: CardModel[];
@@ -73,6 +74,7 @@ class Enemy implements EnemyModel {
     public crit: number, //increase crit probability
     public critDmg: number, //increase crit damages
     public miss: number, //increase missed attack probability
+    public dodge: number, //enemy can dodge hero attacks
     public loot: CardModel[]
   ) {}
 
@@ -172,13 +174,14 @@ export let enemiesArray: EnemyModel[] = [
   new Enemy(
     nanoid(8),
     "Dog",
-    25,
-    15,
-    0,
+    25, //hp
+    15, //dmg
+    0, //def
     "https://lh3.googleusercontent.com/QKmM5tEsu4WATfR7dVoJdcOlxGiyIdC54ZcW9hOAnnDzoOem3SuhBoLttWwfWfkIktyKF8i4gkhUTxpRUJPQ4gHWp5plqh-n-FpPTA=s0",
-    10,
-    100,
-    10,
+    10, //crit chance
+    100, //crit dmg
+    10, //miss
+    0, //dodge
     [
       new Card(nanoid(8), "Bite", "Attack", "*", 30, 0, 15, 2, cardAnim.redhit),
       new Card(nanoid(8), "Waaaf", "Defense", "*", 0, 2, 4, 1, cardAnim.shield),
@@ -187,13 +190,14 @@ export let enemiesArray: EnemyModel[] = [
   new Enemy(
     nanoid(8),
     "Clown",
-    65,
-    5,
-    0,
+    65, //hp
+    5, //dmg
+    0, //def
     "https://lh3.googleusercontent.com/nl211myzjUu7Ly6tu-tFlRyRhBkdbXn18sPa9tVihZTJtN4KiCFNfJ7zcTh99EOi20kJSNyH0FXYsvlY6HiQyfu47vhqRfRPwtX1=s0",
-    20,
-    150,
-    10,
+    20, //crit chance
+    150, //crit dmg
+    10, //miss
+    20, //dodge
     [
       new Card(
         nanoid(8),
@@ -229,6 +233,7 @@ export let enemiesArray: EnemyModel[] = [
     50,
     50,
     20,
+    5,
     [
       new Card(
         nanoid(8),

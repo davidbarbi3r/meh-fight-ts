@@ -19,6 +19,8 @@ export const getDeck = (): CardModel[] => {
   return deckArray;
 };
 
+
+
 // export const selectHero = (id: string, setHero:React.SetStateAction<HeroModel>) => {
 //     const hero = heroArray.filter(hero => hero.id === id)[0]
 //     setHero(hero)

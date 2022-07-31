@@ -24,12 +24,22 @@ function Enemy({ enemy, gameState, lastCard, initialEnemy }: EnemyProps) {
     backgroundColor: "red"
   };
 
+  const animHp = ():string => {
+    if (lastCard.damage){
+      let anim = "char-msg"
+      setTimeout(() => {anim = "char-msg pop"}, 2000)
+      return anim
+    } else {return "char-msg"}
+  }
+
+  const enemyClass = animHp
+
 
   return (
     <div className="char enemy">
-      <p className="char-msg">{lastCard.damage ? "- " + lastCard.damage + " hp": ""}</p>
       <div className="char-container">
         <div className="char-meh">
+          <p className={enemyClass()}>{lastCard.damage ? "- " + lastCard.damage + " hp": "15"}</p>
           <img
             src={`${enemy.img}`}
             alt={enemy.name}
