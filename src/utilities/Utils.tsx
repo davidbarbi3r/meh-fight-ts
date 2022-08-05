@@ -1,15 +1,21 @@
-import {
-  CardModel,
-  EnemyModel,
-  cardArray,
-} from "../data/Data";
+import { CardModel, EnemyModel, cardArray } from "../data/Data";
 
 export const shuffle = (array: any[]) => {
-  array.sort(function (a, b) {
-    if (a.id < b.id) return -1;
-    if (a.id > b.id) return 1;
-    return 0;
-  });
+  let currentIndex = array.length;
+  let randomIndex: number;
+
+  // While there remain elements to shuffle.
+  while (currentIndex != 0) {
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex],
+    ];
+  }
   return array;
 };
 
@@ -18,10 +24,3 @@ export const getDeck = (): CardModel[] => {
   shuffle(deckArray);
   return deckArray;
 };
-
-
-
-// export const selectHero = (id: string, setHero:React.SetStateAction<HeroModel>) => {
-//     const hero = heroArray.filter(hero => hero.id === id)[0]
-//     setHero(hero)
-//   }

@@ -24,7 +24,6 @@ function Game() {
   const [hand, setHand] = useState<CardModel[]>([]);
   const [discardPile, setDiscardPile] = useState<CardModel[]>([]);
   const [turnCount, setTurnCount] = useState(0);
-  const [heroMana, setHeroMana] = useState(0);
   const [lastCard, setLastCard] = useState<CardModel>(deck[0]);
   const [enemyInitialStats, setEnemyInitialStats] = useState(enemiesArray[0]);
   const [heroInitalStats, setHeroInitialStats] = useState(heroArray[0]);
@@ -37,7 +36,7 @@ function Game() {
 
   const selectCard = (cardselected: CardModel) => {
     const card = currentEnemy.loot.filter((card) => card === cardselected)[0];
-    const message = {}
+    const message = {};
     const newEnemy = enemies.pop();
     newEnemy && setCurrentEnemy(newEnemy);
     newEnemy && setEnemyInitialStats(newEnemy);
@@ -48,7 +47,7 @@ function Game() {
     // setDiscardPile((prev) => [...prev, ...hand]);
     drawCards(heroSelected.handSize);
     setGameState(gameStatus.Hfighting);
-    return {}
+    return {};
   };
 
   const startFight = (deck: CardModel[]): void => {
@@ -112,7 +111,11 @@ function Game() {
         };
       });
       setHand(hand.filter((item) => item.id !== card.id));
-      return (message = { character: heroSelected.name ,anim: card.anim, defence: card.protection });
+      return (message = {
+        character: heroSelected.name,
+        anim: card.anim,
+        defence: card.protection,
+      });
     } else if (card.type === "Attack") {
       //if enemy doesn't dodge the attack
       if (rand > currentEnemy.dodge / 100) {
