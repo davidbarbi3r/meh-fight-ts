@@ -1,6 +1,6 @@
 import {Cards, CardsProps} from "./Cards";
-import Header from "../../layout/components/Header";
-import Footer from "../../layout/components/Footer";
+import Header from "../layout/Header";
+import Footer from "../layout/Footer";
 import "../../style/LootSelection.css"
 
 

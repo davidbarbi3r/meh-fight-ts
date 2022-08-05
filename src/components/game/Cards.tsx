@@ -1,10 +1,10 @@
 import { CardModel, HeroModel } from "../../data/Data";
 import "../../style/Cards.css";
-import { gameStatus } from "../types/GameTypes";
+import { gameStatus, IMessage } from "../../types/GameTypes";
 
 export interface CardsProps {
   cards: CardModel[];
-  action: (card: CardModel) => void;
+  action: (card: CardModel) => IMessage;
   gameState: gameStatus;
   hero: HeroModel;
 }

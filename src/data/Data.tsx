@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import { shuffle } from "../game/helpers/Utils";
+import { shuffle } from "../utilities/Utils";
 
 /* --- Interfaces ---*/
 

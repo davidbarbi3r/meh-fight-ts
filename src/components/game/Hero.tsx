@@ -1,6 +1,6 @@
 import { HeroModel } from "../../data/Data";
 import "../../style/Char.css";
-import { gameStatus } from "../types/GameTypes";
+import { gameStatus } from "../../types/GameTypes";
 
 interface HeroProps {
   hero: HeroModel;

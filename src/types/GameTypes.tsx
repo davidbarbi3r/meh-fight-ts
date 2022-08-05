@@ -5,3 +5,13 @@ export enum gameStatus {
     enemyDead = "ObjectSelection",
     endGame = "EndGame",
   }
+
+export interface IMessage {
+  character?: string,
+  alert?: string,
+  dmg?: number,
+  protect?: number,
+  crit?: boolean,
+  anim?: string,
+  dodged?: boolean
+}

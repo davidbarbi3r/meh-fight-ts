@@ -1,10 +1,10 @@
-import Header from "../../layout/components/Header";
-import Footer from "../../layout/components/Footer";
+import Header from "../layout/Header";
+import Footer from "../layout/Footer";
 import { Cards } from "./Cards";
 import Hero from "./Hero";
 import Enemy from "./Enemy";
 import { CardModel, EnemyModel, HeroModel } from "../../data/Data";
-import { gameStatus } from "../types/GameTypes";
+import { gameStatus, IMessage } from "../../types/GameTypes";
 import "../../style/Responsive.css";
 
 interface BattleGroundProps {
@@ -14,7 +14,7 @@ interface BattleGroundProps {
   currentEnemy: EnemyModel;
   initialEnemy: EnemyModel;
   hand: CardModel[];
-  useCard: (card: CardModel) => void;
+  useCard: (card: CardModel) => IMessage;
   endTurn: () => void;
   discardPile: number;
   deck: number;
@@ -63,6 +63,7 @@ function BattleGround({
               gameState={gameState}
               hero={heroSelected}
             />
+            {/* game chat here  */}
             <button
               className="std-btn btn-end"
               onClick={endTurn}

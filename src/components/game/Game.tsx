@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../../style/Game.css";
 import "../../style/Responsive.css";
-import Intro from "./Intro";
+import Intro from "../Intro/Intro";
 import {
   CardModel,
   enemiesArray,
@@ -9,8 +9,8 @@ import {
   heroArray,
   HeroModel,
 } from "../../data/Data";
-import { getDeck, shuffle } from "../helpers/Utils";
-import { gameStatus } from "../types/GameTypes";
+import { getDeck, shuffle } from "../../utilities/Utils";
+import { gameStatus, IMessage } from "../../types/GameTypes";
 import BattleGround from "./BattleGround";
 import SelectLoot from "./SelectLoot";
 import EndGame from "./EndGame";
@@ -37,6 +37,7 @@ function Game() {
 
   const selectCard = (cardselected: CardModel) => {
     const card = currentEnemy.loot.filter((card) => card === cardselected)[0];
+    const message = {}
     const newEnemy = enemies.pop();
     newEnemy && setCurrentEnemy(newEnemy);
     newEnemy && setEnemyInitialStats(newEnemy);
@@ -47,6 +48,7 @@ function Game() {
     // setDiscardPile((prev) => [...prev, ...hand]);
     drawCards(heroSelected.handSize);
     setGameState(gameStatus.Hfighting);
+    return {}
   };
 
   const startFight = (deck: CardModel[]): void => {
@@ -87,16 +89,20 @@ function Game() {
     }
   };
 
-  const useCard = (card: CardModel): string => {
+  const useCard = (card: CardModel): IMessage => {
     const rand = Math.random();
+    let message = {};
     setLastCard(card);
     if (currentEnemy.hp === 0) {
+      //if enemy is dead
       alert("Enemy is dead, end turn.");
-      return "Enemy is dead";
+      return (message = { alert: "Enemy is dead, end turn" });
     } else if (heroSelected.mana - card.cost < 0) {
+      //if hero doesn't have enought mana
       alert("Not enought mana, pick an other card or end turn");
-      return "Not enought mana";
+      return (message = { alert: "Not enought mana" });
     } else if (card.type === "Defense") {
+      // if defence card played
       setDiscardPile((prev) => [...prev, card]);
       setHeroSelected((prev) => {
         return {
@@ -106,7 +112,7 @@ function Game() {
         };
       });
       setHand(hand.filter((item) => item.id !== card.id));
-      return card.anim;
+      return (message = { character: heroSelected.name ,anim: card.anim, defence: card.protection });
     } else if (card.type === "Attack") {
       //if enemy doesn't dodge the attack
       if (rand > currentEnemy.dodge / 100) {
@@ -129,15 +135,16 @@ function Game() {
           });
           setHand(hand.filter((item) => item.id !== card.id));
         }
-        return card.anim;
+        return (message = { anim: card.anim });
       } else {
+        //if enemy dodge
         setDiscardPile((prev) => [...prev, card]);
         setHeroSelected((prev) => {
           return { ...prev, mana: prev.mana - card.cost };
         });
         setHand(hand.filter((item) => item.id !== card.id));
       }
-      return "Attack Dodged";
+      return (message = { character: currentEnemy.name, dodged: true });
     } else if (card.type === "Utility") {
       setDiscardPile((prev) => [...prev, card]);
       setHeroSelected((prev) => {
@@ -145,7 +152,7 @@ function Game() {
       });
       setHand(hand.filter((item) => item.id !== card.id));
     }
-    return card.anim;
+    return (message = { anim: card.anim });
   };
 
   const endTurn = () => {

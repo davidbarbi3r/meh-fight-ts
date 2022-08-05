@@ -2,7 +2,7 @@ import {
   CardModel,
   EnemyModel,
   cardArray,
-} from "../../data/Data";
+} from "../data/Data";
 
 export const shuffle = (array: any[]) => {
   array.sort(function (a, b) {

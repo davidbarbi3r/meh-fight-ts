@@ -8,7 +8,7 @@
 */
 import "./index.css"
 
-import Game from "./modules/game/components/Game";
+import Game from "./components/game/Game";
 
 function App() {
   return (
