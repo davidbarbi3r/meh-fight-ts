@@ -2,15 +2,13 @@ import { useState } from "react";
 import "../../style/Game.css";
 import "../../style/Responsive.css";
 import Intro from "../../pages/Intro";
-import {
-  CardModel,
-  enemiesArray,
-  EnemyModel,
-  heroArray,
-  HeroModel,
-} from "../../data/Data";
-import { getDeck, shuffle } from "../../utilities/Utils";
-import { gameStatus, IMessage } from "../../types/GameTypes";
+import {heroArray} from "../../data/Heroes";
+import { enemiesArray } from "../../data/Enemies";
+import { HeroModel } from "../../interfaces/Hero";
+import { EnemyModel } from "../../interfaces/Enemy";
+import { CardModel } from "../../interfaces/Card";
+import { getDeck, getEnemies, shuffle } from "../../utilities/Utils";
+import { gameStatus, IMessage } from "../../interfaces/Game";
 import BattleGround from "./BattleGround";
 import SelectLoot from "./SelectLoot";
 import EndGame from "./EndGame";
@@ -18,7 +16,8 @@ import EndGame from "./EndGame";
 function Game() {
   const [gameState, setGameState] = useState(gameStatus.intro);
   const [heroSelected, setHeroSelected] = useState<HeroModel>(heroArray[0]);
-  const [enemies, setEnemies] = useState<EnemyModel[]>(enemiesArray);
+  const [enemies, setEnemies] = useState<EnemyModel[]>(getEnemies);
+  console.log(enemies)
   const [currentEnemy, setCurrentEnemy] = useState<EnemyModel>(enemiesArray[0]);
   const [deck, setDeck] = useState<CardModel[]>(getDeck);
   const [hand, setHand] = useState<CardModel[]>([]);

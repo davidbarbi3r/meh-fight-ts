@@ -3,8 +3,10 @@ import Footer from "../layout/Footer";
 import { Cards } from "./Cards";
 import Hero from "./Hero";
 import Enemy from "./Enemy";
-import { CardModel, EnemyModel, HeroModel } from "../../data/Data";
-import { gameStatus, IMessage } from "../../types/GameTypes";
+import { HeroModel } from "../../interfaces/Hero";
+import { EnemyModel } from "../../interfaces/Enemy";
+import { CardModel } from "../../interfaces/Card";
+import { gameStatus, IMessage } from "../../interfaces/Game";
 import "../../style/Responsive.css";
 
 interface BattleGroundProps {

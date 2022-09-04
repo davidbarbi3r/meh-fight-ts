@@ -1,11 +1,14 @@
-import { CardModel, EnemyModel, cardArray } from "../data/Data";
+import { CardModel } from "../interfaces/Card";
+import { cardArray } from "../data/Cards";
+import { EnemyModel } from "../interfaces/Enemy";
+import { enemiesArray } from "../data/Enemies";
 
 export const shuffle = (array: any[]) => {
   let currentIndex = array.length;
   let randomIndex: number;
 
   // While there remain elements to shuffle.
-  while (currentIndex != 0) {
+  while (currentIndex !== 0) {
     // Pick a remaining element.
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex--;
@@ -20,7 +23,13 @@ export const shuffle = (array: any[]) => {
 };
 
 export const getDeck = (): CardModel[] => {
-  const deckArray = [...cardArray];
-  shuffle(deckArray);
-  return deckArray;
+  const deck = [...cardArray];
+  shuffle(deck);
+  return deck;
 };
+
+export const getEnemies = (): EnemyModel[] => {
+  const enemies = [...enemiesArray]
+  shuffle(enemies)
+  return enemies
+}

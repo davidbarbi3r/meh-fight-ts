@@ -1,6 +1,7 @@
-import { CardModel, HeroModel } from "../../data/Data";
+import { HeroModel } from "../../interfaces/Hero";
+import { CardModel } from "../../interfaces/Card";
 import "../../style/Cards.css";
-import { gameStatus, IMessage } from "../../types/GameTypes";
+import { gameStatus, IMessage } from "../../interfaces/Game";
 
 export interface CardsProps {
   cards: CardModel[];

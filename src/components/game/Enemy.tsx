@@ -1,6 +1,7 @@
-import { CardModel, EnemyModel } from "../../data/Data";
+import { EnemyModel } from "../../interfaces/Enemy";
+import { CardModel } from "../../interfaces/Card";
 import "../../style/Char.css";
-import { gameStatus } from "../../types/GameTypes";
+import { gameStatus } from "../../interfaces/Game";
 
 interface EnemyProps {
   enemy: EnemyModel;
