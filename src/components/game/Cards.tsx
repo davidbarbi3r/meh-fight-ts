@@ -1,11 +1,11 @@
 import { HeroModel } from "../../interfaces/Hero";
 import { CardModel } from "../../interfaces/Card";
 import "../../style/Cards.css";
-import { gameStatus, IMessage } from "../../interfaces/Game";
+import { gameStatus } from "../../interfaces/Game";
 
 export interface CardsProps {
   cards: CardModel[];
-  action: (card: CardModel) => IMessage;
+  action: (card: CardModel) => void;
   gameState: gameStatus;
   hero: HeroModel;
 }

@@ -6,7 +6,7 @@ import Enemy from "./Enemy";
 import { HeroModel } from "../../interfaces/Hero";
 import { EnemyModel } from "../../interfaces/Enemy";
 import { CardModel } from "../../interfaces/Card";
-import { gameStatus, IMessage } from "../../interfaces/Game";
+import { gameStatus } from "../../interfaces/Game";
 import "../../style/Responsive.css";
 
 interface BattleGroundProps {
@@ -16,7 +16,7 @@ interface BattleGroundProps {
   currentEnemy: EnemyModel;
   initialEnemy: EnemyModel;
   hand: CardModel[];
-  useCard: (card: CardModel) => IMessage;
+  useCard: (card: CardModel) => void;
   endTurn: () => void;
   discardPile: number;
   deck: number;
