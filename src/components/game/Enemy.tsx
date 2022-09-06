@@ -2,6 +2,7 @@ import { EnemyModel } from "../../interfaces/Enemy";
 import { CardModel } from "../../interfaces/Card";
 import "../../style/Char.css";
 import { gameStatus } from "../../interfaces/Game";
+import { useEffect, useState } from "react";
 
 interface EnemyProps {
   enemy: EnemyModel;
@@ -11,8 +12,9 @@ interface EnemyProps {
 }
 
 function Enemy({ enemy, gameState, lastCard, initialEnemy }: EnemyProps) {
+  const [anim, setAnim] = useState(false)
   const classStyle =
-    gameState === gameStatus.Efighting ? `char-img fighting ${lastCard.anim}` : "char-img";
+    gameState === gameStatus.Efighting ? `char-img fighting` : "char-img";
 
   const enemyDead = enemy.hp === 0 ? "dead" : ""
 
@@ -21,26 +23,26 @@ function Enemy({ enemy, gameState, lastCard, initialEnemy }: EnemyProps) {
   const hpBar = {
     color: "white",
     width: `${heathPercent}%`,
-    animation: "fadeInAnimation 2s",
+    animation: "fadeInAnimation 2s linear",
     backgroundColor: "red"
   };
 
-  const animHp = ():string => {
-    if (lastCard.damage){
-      let anim = "char-msg"
-      setTimeout(() => {anim = "char-msg pop"}, 2000)
-      return anim
-    } else {return "char-msg"}
-  }
-
-  const enemyClass = animHp
+  useEffect(() => {
+    if (enemy.hp > 0) {
+      setAnim(true)
+      console.log("Loosing life...")
+      setTimeout(() => {
+        setAnim(false)
+      }, 500)
+    }
+  }, [enemy.hp])
+  
 
 
   return (
     <div className="char enemy">
       <div className="char-container">
-        <div className="char-meh">
-          <p className={enemyClass()}>{lastCard.damage ? "- " + lastCard.damage + " hp": "15"}</p>
+        <div className={`${anim && enemy.hp < initialEnemy.hp? `${lastCard.anim}` : anim && enemy.hp < initialEnemy.hp*0.25 ? "lowLife" : ""}`}>
           <img
             src={`${enemy.img}`}
             alt={enemy.name}

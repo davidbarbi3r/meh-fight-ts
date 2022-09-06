@@ -3,9 +3,9 @@ import { nanoid } from "nanoid";
 import { Card, CardModel, cardAnim } from "../interfaces/Card";
 
 export let cardArray: CardModel[] = [
-    new Card(nanoid(8), "MEHHHH", "Attack", "*", 10, 0, 5, 1, cardAnim.redhit),
-    new Card(nanoid(8), "MEHHHH", "Attack", "*", 10, 0, 5, 1, cardAnim.redhit),
-    new Card(nanoid(8), "MEHHHH", "Attack", "*", 10, 0, 5, 1, cardAnim.redhit),
+    new Card(nanoid(8), "MEHHHH", "Attack", "*", 10, 0, 5, 1, cardAnim.vibrate),
+    new Card(nanoid(8), "MEHHHH", "Attack", "*", 10, 0, 5, 1, cardAnim.vibrate),
+    new Card(nanoid(8), "MEHHHH", "Attack", "*", 10, 0, 5, 1, cardAnim.vibrate),
     new Card(
       nanoid(8),
       "ProtectMeh",
@@ -28,8 +28,8 @@ export let cardArray: CardModel[] = [
       2,
       cardAnim.shield
     ),
-    new Card(nanoid(8), "Kecece", "Attack", "*", 15, 5, 10, 2, cardAnim.redhit),
-    new Card(nanoid(8), "Kecece", "Attack", "*", 15, 5, 10, 2, cardAnim.redhit),
+    new Card(nanoid(8), "Kecece", "Attack", "*", 15, 5, 10, 2, cardAnim.vibrate),
+    new Card(nanoid(8), "Kecece", "Attack", "*", 15, 5, 10, 2, cardAnim.vibrate),
     new Card(
       nanoid(8),
       "UltiMEHHHHH",

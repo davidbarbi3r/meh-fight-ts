@@ -1,6 +1,7 @@
 import { HeroModel } from "../../interfaces/Hero";
 import "../../style/Char.css";
 import { gameStatus } from "../../interfaces/Game";
+import { useEffect, useState } from "react";
 
 interface HeroProps {
   hero: HeroModel;
@@ -9,10 +10,21 @@ interface HeroProps {
 }
 
 function Hero({ hero, gameState, initialHero }: HeroProps) {
+  const [anim, setAnim] = useState(false)
   const classHero =
-    gameState === gameStatus.Hfighting ? "char-img fighting" : "char-img";
+    gameState === gameStatus.Hfighting ? "char-img fighting" : anim ? `vibrate`:"char-img";
   const classStatsHero = hero.defense > 0 && "def";
+  
+  useEffect(() => {
+    if (hero.hp > 0) {
+      setAnim(true)
+      setTimeout(() => {
+        setAnim(false)
+      }, 500)
+    }
+  }, [hero.hp])
 
+  const animateHero = anim && initialHero.hp > hero.hp ? "vibrate" : "" 
   const heathPercent = (hero.hp / initialHero.hp) * 100;
   const manaPercent = hero.mana > initialHero.mana ? 100 : (hero.mana / initialHero.mana) * 100;
   const defPercent = hero.defense
@@ -45,7 +57,7 @@ function Hero({ hero, gameState, initialHero }: HeroProps) {
   return (
     <div className="char hero">
       <div className="char-container">
-        <div className="char-meh">
+        <div className={`char-meh ${animateHero}`}>
           <img
             src={hero.img}
             alt={hero.name}

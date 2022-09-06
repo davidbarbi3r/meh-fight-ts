@@ -15,7 +15,7 @@ export const enemiesArray: EnemyModel[] = [
     10, //miss
     0, //dodge
     [
-      new Card(nanoid(8), "Bite", "Attack", "*", 30, 0, 15, 2, cardAnim.redhit),
+      new Card(nanoid(8), "Bite", "Attack", "*", 30, 0, 15, 2, cardAnim.vibrate),
       new Card(nanoid(8), "Waaaf", "Defense", "*", 0, 2, 4, 1, cardAnim.shield),
     ]
   ),
@@ -76,7 +76,7 @@ export const enemiesArray: EnemyModel[] = [
         0,
         20,
         2,
-        cardAnim.shake
+        cardAnim.blackout
       ),
     ]
   ),

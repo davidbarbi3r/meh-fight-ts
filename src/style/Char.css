@@ -68,8 +68,8 @@
   text-overflow: unset;
 }
 
-.pop {
-  animation: pop 2s infinite;
+.shake {
+  animation: shake 0.5s linear infinite;
 }
 
 .dead {
@@ -77,6 +77,81 @@
   transform: rotate(180deg);
   opacity: 0.7;
   background-blend-mode: darken;
+}
+
+.vibrate {
+  animation: vibrate 0.5s linear both;
+}
+
+.blackout {
+  animation: blackout 0.5s linear both;
+}
+
+.lowLife {
+  content: '';
+  position: absolute;
+  width: 110%;
+  height: 110%;
+  top: 0;
+  left: 0;
+  background: rgb(226, 43, 43);
+  z-index: -1;
+  animation: pulse 1000ms cubic-bezier(0.9, 0.7, 0.5, 0.9) infinite;
+}
+
+@keyframes lowLife {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.4;
+  }
+}
+
+@keyframes vibrate {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-5px, 5px);
+  }
+  40% {
+    transform: translate(-5px, -5px);
+  }
+  60% {
+    transform: translate(5px, 5px);
+  }
+  80% {
+    transform: translate(5px, -5px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+@keyframes blackout {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-35px, 15px) rotate(-20deg);
+    background-color: red;
+    width: 105%;
+    border-radius: 15px;
+  }
+  40% {
+    transform: translate(-25px, -15px) rotate(0deg);
+  }
+  60% {
+    transform: translate(20px, 15px) rotate(20deg);
+  }
+  80% {
+    transform: translate(25px, -15px) rotate(-20deg);
+  }
+  100% {
+    transform: translate(0) rotate(0deg);
+  }
 }
 
 @keyframes dead {
@@ -100,11 +175,23 @@
 }
 
 @keyframes shake {
-  from {
-    transform: translateX(-10px);
+  0% {
+    transform: rotate(0deg);
   }
-  to {
-    transform: translateX(10px);
+  20% {
+    transform: rotate(10deg);
+  }
+  40% {
+    transform: rotate(0deg);
+  }
+  60% {
+    transform: rotate(-10deg);
+  }
+  80% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(0deg);
   }
 }
 

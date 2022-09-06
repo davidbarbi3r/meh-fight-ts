@@ -12,7 +12,7 @@ export interface CardModel {
 
 export enum cardAnim {
   shake = "shake",
-  redhit = "redhit",
+  vibrate = "vibrate",
   blackout = "blackout",
   heal = "heal",
   shield = "shield",

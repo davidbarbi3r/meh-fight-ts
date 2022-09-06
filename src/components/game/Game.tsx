@@ -3,12 +3,11 @@ import "../../style/Game.css";
 import "../../style/Responsive.css";
 import Intro from "../../pages/Intro";
 import {heroArray} from "../../data/Heroes";
-import { enemiesArray } from "../../data/Enemies";
 import { HeroModel } from "../../interfaces/Hero";
 import { EnemyModel } from "../../interfaces/Enemy";
 import { CardModel } from "../../interfaces/Card";
 import { getDeck, getEnemies, shuffle } from "../../utilities/Utils";
-import { gameStatus, IMessage } from "../../interfaces/Game";
+import { gameStatus } from "../../interfaces/Game";
 import BattleGround from "./BattleGround";
 import SelectLoot from "./SelectLoot";
 import EndGame from "./EndGame";
@@ -17,14 +16,13 @@ function Game() {
   const [gameState, setGameState] = useState(gameStatus.intro);
   const [heroSelected, setHeroSelected] = useState<HeroModel>(heroArray[0]);
   const [enemies, setEnemies] = useState<EnemyModel[]>(getEnemies);
-  console.log(enemies)
-  const [currentEnemy, setCurrentEnemy] = useState<EnemyModel>(enemiesArray[0]);
+  const [currentEnemy, setCurrentEnemy] = useState<EnemyModel>(enemies[0]);
   const [deck, setDeck] = useState<CardModel[]>(getDeck);
   const [hand, setHand] = useState<CardModel[]>([]);
   const [discardPile, setDiscardPile] = useState<CardModel[]>([]);
   const [turnCount, setTurnCount] = useState(0);
   const [lastCard, setLastCard] = useState<CardModel>(deck[0]);
-  const [enemyInitialStats, setEnemyInitialStats] = useState(enemiesArray[0]);
+  const [enemyInitialStats, setEnemyInitialStats] = useState(enemies[0]);
   const [heroInitalStats, setHeroInitialStats] = useState(heroArray[0]);
 
   const selectHero = (id: string) => {
@@ -33,9 +31,8 @@ function Game() {
     setHeroInitialStats(hero);
   };
 
-  const selectCard = (cardselected: CardModel) => {
-    const card = currentEnemy.loot.filter((card) => card === cardselected)[0];
-    const message = {};
+  const selectLootCard = (cardSelected: CardModel) => {
+    const card = currentEnemy.loot.filter((card) => card === cardSelected)[0];
     const newEnemy = enemies.pop();
     newEnemy && setCurrentEnemy(newEnemy);
     newEnemy && setEnemyInitialStats(newEnemy);
@@ -43,7 +40,6 @@ function Game() {
     setHeroSelected((prev) => {
       return { ...prev, mana: heroInitalStats.mana, defense: 0 };
     });
-    // setDiscardPile((prev) => [...prev, ...hand]);
     drawCards(heroSelected.handSize);
     setGameState(gameStatus.Hfighting);
     return {};
@@ -87,18 +83,18 @@ function Game() {
     }
   };
 
-  const useCard = (card: CardModel): IMessage => {
+  const useCard = (card: CardModel): void => {
     const rand = Math.random();
-    let message = {};
     setLastCard(card);
+
     if (currentEnemy.hp === 0) {
       //if enemy is dead
       alert("Enemy is dead, end turn.");
-      return (message = { alert: "Enemy is dead, end turn" });
+
     } else if (heroSelected.mana - card.cost < 0) {
       //if hero doesn't have enought mana
       alert("Not enought mana, pick an other card or end turn");
-      return (message = { alert: "Not enought mana" });
+
     } else if (card.type === "Defense") {
       // if defence card played
       setDiscardPile((prev) => [...prev, card]);
@@ -110,11 +106,7 @@ function Game() {
         };
       });
       setHand(hand.filter((item) => item.id !== card.id));
-      return (message = {
-        character: heroSelected.name,
-        anim: card.anim,
-        defence: card.protection,
-      });
+
     } else if (card.type === "Attack") {
       //if enemy doesn't dodge the attack
       if (rand > currentEnemy.dodge / 100) {
@@ -137,7 +129,6 @@ function Game() {
           });
           setHand(hand.filter((item) => item.id !== card.id));
         }
-        return (message = { anim: card.anim });
       } else {
         //if enemy dodge
         setDiscardPile((prev) => [...prev, card]);
@@ -146,7 +137,7 @@ function Game() {
         });
         setHand(hand.filter((item) => item.id !== card.id));
       }
-      return (message = { character: currentEnemy.name, dodged: true });
+      
     } else if (card.type === "Utility") {
       setDiscardPile((prev) => [...prev, card]);
       setHeroSelected((prev) => {
@@ -154,7 +145,6 @@ function Game() {
       });
       setHand(hand.filter((item) => item.id !== card.id));
     }
-    return (message = { anim: card.anim });
   };
 
   const endTurn = () => {
@@ -206,7 +196,7 @@ function Game() {
     ) : gameState === gameStatus.enemyDead ? (
       <SelectLoot
         cards={currentEnemy.loot}
-        action={selectCard}
+        action={selectLootCard}
         gameState={gameState}
         hero={heroSelected}
       />
