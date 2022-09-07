@@ -65,6 +65,7 @@ What to do:
 
 
 - [X] Fix known bugs
+  - [ ] Hero wiggle when life < 100% when a new enemy spawn
   - [X] Game doesn't stop when all enemies are dead
   - [X] Disable card rack & button when it's Enemy turn
   - [X] The negative black hole, -500mana -1000hp ? No problem...
