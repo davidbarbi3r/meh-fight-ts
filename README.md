@@ -50,6 +50,10 @@ What to do:
 <!-- ROADMAP -->
 ## Roadmap
 
+- [ ] Add routes to the project for differents game phases
+- [ ] Add effects during fight
+- [ ] Isolate Interfaces in distincts files
+- [ ] Implement useReducer hook for game states
 - [X] Add cards loots after enemy killed
 - [X] Add some styling
 - [X] Add script to enemies (for the moment they just Attack)
