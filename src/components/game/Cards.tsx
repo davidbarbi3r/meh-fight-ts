@@ -2,6 +2,7 @@ import { HeroModel } from "../../interfaces/Hero";
 import { CardModel } from "../../interfaces/Card";
 import "../../style/Cards.css";
 import { gameStatus } from "../../interfaces/Game";
+import cardRareBackground from "../../style/3DPattern.jpg"
 
 export interface CardsProps {
   cards: CardModel[];
@@ -19,18 +20,18 @@ export function Cards({ cards, action, gameState, hero }: CardsProps) {
       {cards.map((card) => (
         <div
           style={{
-            backgroundColor:
-              card.type === "Attack"
-                ? "#d69797"
-                : card.type === "Defense"
-                ? "#97c4d6"
-                : "#97d6b7",
+            background:
+              card.rarity === 3
+                 ? "#f7a766"
+                 : "",
+            //     ? "#97c4d6"
+            //     : "#97d6b7",
             border:
-              card.rarity === 2
-                ? "3px solid blue"
-                : card.rarity === 3
-                ? "3px solid red"
-                : "1px solid black",
+              card.type === "Attack"
+                ? "4px inset red"
+                : card.type === "Defense"
+                ? "4px outset blue"
+                : "4px inset green",
             cursor: gameState === gameStatus.Hfighting ? card.cost > hero.mana ? "not-allowed" : "pointer" : "pointer",
             opacity: gameState === gameStatus.Hfighting ? card.cost > hero.mana ? 0.7 : 1 : 1,
           }}
