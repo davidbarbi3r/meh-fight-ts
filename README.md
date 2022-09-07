@@ -51,16 +51,16 @@ What to do:
 ## Roadmap
 
 - [ ] Add routes to the project for differents game phases
-- [ ] Add effects during fight
-- [ ] Isolate Interfaces in distincts files
 - [ ] Implement useReducer hook for game states
+- [ ] Add : use Hero stats for damage calculs / crit etc ...
+- [ ] Add objects loot to increase / decrease stats
+- [ ] Add save option
+- [X] Add effects during fight
+- [X] Isolate Interfaces in distincts files
 - [X] Add cards loots after enemy killed
 - [X] Add some styling
 - [X] Add script to enemies (for the moment they just Attack)
 - [X] Add : use Enemies stats for damage calculs / crit etc ...
-- [ ] Add : use Hero stats for damage calculs / crit etc ...
-- [ ] Add objects loot to increase / decrease stats
-- [ ] Add save option
 - [X] Add Responsive
 
 
