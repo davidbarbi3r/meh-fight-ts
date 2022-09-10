@@ -10,7 +10,6 @@ import { gameStatus } from "../../interfaces/Game";
 import "../../style/Responsive.css";
 
 interface BattleGroundProps {
-  resetGame: () => void;
   heroSelected: HeroModel;
   initalHero: HeroModel;
   currentEnemy: EnemyModel;
@@ -25,7 +24,6 @@ interface BattleGroundProps {
 }
 
 function BattleGround({
-  resetGame,
   heroSelected,
   currentEnemy,
   hand,
@@ -42,7 +40,7 @@ function BattleGround({
 
   return (
     <div className="App">
-      <Header resetGame={resetGame} />
+      <Header/>
       <section className="App-game-container">
         <div className="App-game-players-container">
           <Hero
