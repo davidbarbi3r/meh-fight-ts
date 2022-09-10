@@ -1,6 +1,6 @@
-import Header from "../components/layout/Header";
-import Footer from "../components/layout/Footer";
-import "../style/Intro.css"
+import Header from "../layout/Header";
+import Footer from "../layout/Footer";
+import "../../style/Intro.css";
 
 function Intro(props: any) {
   const heroImgHtml = props.heroArray.map(
@@ -28,14 +28,14 @@ function Intro(props: any) {
   );
   return (
     <div className="App">
-      <Header/>
-      <section className="game-starter">
-        <section className="game-starter-charSelection">{heroImgHtml}</section>
-        <button className="std-btn" onClick={props.startGame}>
-          Start Game
-        </button>
-      </section>
-      <Footer/>
+      <Header />
+        <section className="game-starter">
+          <section className="game-starter-charSelection">{heroImgHtml}</section>
+          <button className="std-btn" onClick={props.startGame}>
+            Start Game
+          </button>
+        </section>
+      <Footer />
     </div>
   );
 }

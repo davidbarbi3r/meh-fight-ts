@@ -2,7 +2,6 @@ import { HeroModel } from "../../interfaces/Hero";
 import { CardModel } from "../../interfaces/Card";
 import "../../style/Cards.css";
 import { gameStatus } from "../../interfaces/Game";
-import cardRareBackground from "../../style/3DPattern.jpg"
 
 export interface CardsProps {
   cards: CardModel[];
@@ -24,8 +23,6 @@ export function Cards({ cards, action, gameState, hero }: CardsProps) {
               card.rarity === 3
                  ? "#f7a766"
                  : "",
-            //     ? "#97c4d6"
-            //     : "#97d6b7",
             border:
               card.type === "Attack"
                 ? "4px inset red"
