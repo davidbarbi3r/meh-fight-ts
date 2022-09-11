@@ -50,6 +50,7 @@ What to do:
 <!-- ROADMAP -->
 ## Roadmap
 
+- [X] Add a home page + router for game
 - [X] Add cards loots after enemy killed
 - [X] Add some styling
 - [X] Add script to enemies (for the moment they just Attack)
