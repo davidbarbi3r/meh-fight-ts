@@ -1,8 +1,57 @@
-import "../../style/Footer.css";
+import {styled} from "@stitches/react"
+import OSIcon from "../../assets/blackSeaIcon.png"
+
+const StyledFooter = styled("footer", {
+  width: "100%",
+  display: "flex",
+  justifyContent: "space-evenly",
+  alignItems: "center",
+  backgroundColor: "beige",
+  fontFamily: "acme",
+  "& div":{
+    display: "flex",
+    "@media (max-width: 675px)": {
+      flexDirection: "column"
+    }
+  },
+  "& p ": {
+    display: "flex",
+    justifyContent: "space-around",
+    alignItems: "center",
+    "@media (max-width: 675px)": {
+      justifyContent: "center",
+    }
+  },
+  "& i": {
+    fontSize: "2em",
+    padding: "0.2em"
+  },
+  "& img": {
+    width: "2.3em",
+    paddingTop: "2px",
+    paddingLeft: "0.2em"
+  }, 
+  "& a": {
+    textDecoration: "none",
+    color: "black"
+  },
+  "& a:hover": {
+    opacity: "0.7"
+  }, 
+  "@media (max-width: 675px)": {
+    fontSize: "0.7rem",
+    padding: "0" 
+  }, 
+  "& span": {
+    "@media (max-width: 675px)": {
+      display: "none"
+    }
+  }
+})
 
 export default function Footer() {
   return (
-    <footer>
+    <StyledFooter>
       <div>
         <p>
           Made by : @Gnark
@@ -21,11 +70,14 @@ export default function Footer() {
           <a href="https://edwardfduffy.com/" target={"#"}>
             <i className="devicon-chrome-plain"></i>
           </a>
+          <a href="https://opensea.io/collection/mehs" target={"#"}>
+            <img src={OSIcon} alt="opensea icon"></img>
+          </a>
         </p>
       </div>
-      <p>
-        V.0.6.0
-      </p>
-    </footer>
+      <span>
+        V.0.6.1
+      </span>
+    </StyledFooter>
   );
 }

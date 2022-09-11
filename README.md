@@ -50,13 +50,7 @@ What to do:
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Add routes to the project for differents game phases
-- [ ] Implement useReducer hook for game states
-- [ ] Add : use Hero stats for damage calculs / crit etc ...
-- [ ] Add objects loot to increase / decrease stats
-- [ ] Add save option
-- [X] Add effects during fight
-- [X] Isolate Interfaces in distincts files
+- [X] Add a home page + router for game
 - [X] Add cards loots after enemy killed
 - [X] Add some styling
 - [X] Add script to enemies (for the moment they just Attack)

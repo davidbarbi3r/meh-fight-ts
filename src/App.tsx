@@ -1,20 +1,18 @@
-/* Known bugs :
- */
-
-/* To be implemented : 
-  - Crit / Missed / normal dmg with attack cards,
-  - multiple enemies in same fight ? 
-  - Fight animations
-*/
+import {Routes, Route} from "react-router-dom"
+import Home from "./pages/Home"
+import Game from "./pages/Game";
 import "./index.css"
 
-import Game from "./components/game/Game";
+/* To be implemented : 
+  - multiple enemies in same fight ? 
+*/
 
 function App() {
   return (
-    <div className="App">
-      <Game />
-    </div>
+      <Routes>
+        <Route path="/meh-fight-ts" element={<Home/>}/>
+        <Route path="/meh-fight-ts/game" element={<Game />}/>
+      </Routes>
   );
 }
 

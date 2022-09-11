@@ -1,16 +1,16 @@
 import { useState } from "react";
-import "../../style/Game.css";
-import "../../style/Responsive.css";
-import Intro from "../../pages/Intro";
-import {heroArray} from "../../data/Heroes";
-import { HeroModel } from "../../interfaces/Hero";
-import { EnemyModel } from "../../interfaces/Enemy";
-import { CardModel } from "../../interfaces/Card";
-import { getDeck, getEnemies, shuffle } from "../../utilities/Utils";
-import { gameStatus } from "../../interfaces/Game";
-import BattleGround from "./BattleGround";
-import SelectLoot from "./SelectLoot";
-import EndGame from "./EndGame";
+import "../style/Game.css";
+import "../style/Responsive.css";
+import Intro from "../components/game/Intro";
+import {heroArray} from "../data/Heroes";
+import { HeroModel } from "../interfaces/Hero";
+import { EnemyModel } from "../interfaces/Enemy";
+import { CardModel } from "../interfaces/Card";
+import { getDeck, getEnemies, shuffle } from "../utilities/Utils";
+import { gameStatus } from "../interfaces/Game";
+import BattleGround from "../components/game/BattleGround";
+import SelectLoot from "../components/game/SelectLoot";
+import EndGame from "../components/game/EndGame";
 
 function Game() {
   const [gameState, setGameState] = useState(gameStatus.intro);
@@ -61,10 +61,6 @@ function Game() {
       throw new Error("You must select a Hero");
     }
   }
-
-  const resetGame = (): void => {
-    setGameState(gameStatus.intro);
-  };
 
   const getNewHand = (number: number): CardModel[] => {
     const newHand = deck.splice(0, number);
@@ -202,7 +198,6 @@ function Game() {
       />
     ) : (
       <BattleGround
-        resetGame={resetGame}
         heroSelected={heroSelected}
         initalHero={heroInitalStats}
         currentEnemy={currentEnemy}
@@ -217,7 +212,7 @@ function Game() {
       />
     );
 
-  return <div>{gameHtml}</div>;
+  return <div className="App">{gameHtml}</div>;
 }
 
 export default Game;
