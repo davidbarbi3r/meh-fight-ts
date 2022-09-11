@@ -1,6 +1,8 @@
+import {styled} from "@stitches/react"
 import { HeroModel } from "../../interfaces/Hero";
 import { CardModel } from "../../interfaces/Card";
 import "../../style/Cards.css";
+import "../../style/Responsive.css"
 import { gameStatus } from "../../interfaces/Game";
 
 export interface CardsProps {
@@ -10,6 +12,31 @@ export interface CardsProps {
   hero: HeroModel;
 }
 
+const StyledCard = styled("button", {
+  display:"flex",
+  flexDirection: "column",
+  justifyContent: "space-evenly",
+  alignItems: "flex-start",
+  position: "relative",
+  borderRadius: "5%",
+  border: "2px inset black",
+  margin: "-5em -1em",
+  backgroundColor: "#f1d8b6",
+  transition: "all 300ms ease", 
+  padding: "1.5em",
+  minWidth: "100px",
+  width: "100%",
+  fontFamily: "acme",
+  "media(max-width: 675px)": {
+    width: "40px"
+  },
+  "&:hover, &:focus": {
+  transform: "translateY(-2em)",
+  marginRight: "1em",
+  cursor: "pointer",
+}
+})
+
 export function Cards({ cards, action, gameState, hero }: CardsProps) {
   const cardRackClass =
     gameState === gameStatus.Efighting ? "card-rack disabled" : "card-rack";
@@ -17,7 +44,7 @@ export function Cards({ cards, action, gameState, hero }: CardsProps) {
   return (
     <div className={cardRackClass}>
       {cards.map((card) => (
-        <div
+        <StyledCard
           style={{
             background:
               card.rarity === 3
@@ -32,7 +59,6 @@ export function Cards({ cards, action, gameState, hero }: CardsProps) {
             cursor: gameState === gameStatus.Hfighting ? card.cost > hero.mana ? "not-allowed" : "pointer" : "pointer",
             opacity: gameState === gameStatus.Hfighting ? card.cost > hero.mana ? 0.7 : 1 : 1,
           }}
-          className="card"
           onClick={() => action(card)}
           key={card.id}
         >
@@ -48,7 +74,7 @@ export function Cards({ cards, action, gameState, hero }: CardsProps) {
           <p className="rarity">
             {card.rarity === 1 ? "⚫" : card.rarity === 2 ? "⬛" : "🔶"}
           </p>
-        </div>
+        </StyledCard>
       ))}
     </div>
   );

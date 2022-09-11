@@ -6,7 +6,7 @@
     margin-top: 6.5em;
 }
 
-.card {
+/* .card {
     display:flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -20,7 +20,7 @@
     padding: 1.5em;
     min-width: 100px;
     width: 100%;
-}
+} */
 
 .card-title {
     margin: 0 auto;
@@ -29,13 +29,6 @@
 .cards-specs {
     text-align: center;
     text-decoration: none;
-}
-
-.card:hover,
-.card:focus{
-  transform: translateY(-2em);
-  margin-right: 1em;
-  cursor: pointer;
 }
 
 ul {
