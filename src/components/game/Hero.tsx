@@ -1,7 +1,7 @@
 import { HeroModel } from "../../interfaces/Hero";
 import "../../style/Char.css";
 import { gameStatus } from "../../interfaces/Game";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface HeroProps {
   hero: HeroModel;
@@ -14,14 +14,17 @@ function Hero({ hero, gameState, initialHero }: HeroProps) {
   const classHero =
     gameState === gameStatus.Hfighting ? "char-img fighting" : anim ? `vibrate`:"char-img";
   const classStatsHero = hero.defense > 0 && "def";
-  
+  const didMount = useRef(false)
+
+
   useEffect(() => {
-    if (hero.hp > 0) {
-      setAnim(true)
-      setTimeout(() => {
-        setAnim(false)
-      }, 500)
-    }
+
+    if (didMount.current) {
+        setAnim(true)
+        setTimeout(() => {
+          setAnim(false)
+        }, 500) 
+    } else didMount.current = true
   }, [hero.hp])
 
   const animateHero = anim && initialHero.hp > hero.hp ? "vibrate" : "" 

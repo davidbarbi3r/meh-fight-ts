@@ -76,7 +76,7 @@ export default function Footer() {
         </p>
       </div>
       <span>
-        V.0.6.1
+        V.0.6.2
       </span>
     </StyledFooter>
   );
