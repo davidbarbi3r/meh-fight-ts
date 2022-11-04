@@ -3,7 +3,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![mehsCard-v0-7-2](https://user-images.githubusercontent.com/96946497/181690508-b54b950a-8684-4683-a578-b54f60f4d508.png)
+![mehsCard-v0-7-0](https://user-images.githubusercontent.com/96946497/181690508-b54b950a-8684-4683-a578-b54f60f4d508.png)
 
 This App is a one page Deck-building card-game. Chose your hero & fight the enemies.
 
