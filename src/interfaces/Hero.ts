@@ -1,3 +1,5 @@
+import { Card } from "./Card";
+
 export interface HeroModel {
     id: string;
     name: string;
@@ -10,6 +12,8 @@ export interface HeroModel {
     miss: number;
     handSize: number;
     gold: number;
+    isDead: boolean,
+    specialCards?: Card[] // idea for future implementation (some special cards to add to the normal deck)
   }
 
 export class Hero implements HeroModel {
@@ -24,6 +28,10 @@ export class Hero implements HeroModel {
       public critDmg: number, //increase crit damages
       public miss: number, //increase missed attack probability
       public handSize: number,
-      public gold: number
+      public gold: number,
+      public isDead: boolean = false
     ) {}
+    public useCard(){
+
+    }  
   }
