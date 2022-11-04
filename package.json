@@ -1,8 +1,8 @@
 {
   "name": "meh-fight-ts",
-  "version": "0.6.2",
+  "version": "0.7.2",
   "homepage": "https://davidbarbi3r.github.io/meh-fight-ts",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@stitches/react": "^1.2.8",
     "@testing-library/jest-dom": "^5.16.4",
