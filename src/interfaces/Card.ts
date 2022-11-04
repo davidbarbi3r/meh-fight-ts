@@ -1,3 +1,6 @@
+import { EnemyModel } from "./Enemy";
+import { HeroModel } from "./Hero";
+
 export interface CardModel {
   id: string;
   name: string;
@@ -33,13 +36,14 @@ export class Card implements CardModel {
     public anim: cardAnim
   ) {}
 
-  /*useCard (EnnemyHp: number, HeroMana: number, HeroDefense: number) {
-          if (this.type === "Attack") {
-              EnnemyHp -= this.damage
-              HeroMana -= this.cost
-          } else {
-              HeroDefense += this.protection 
-              HeroMana -= this.cost
-          }
-      }*/
+  public useCard(
+    card: CardModel,
+    setLastCard: (value: React.SetStateAction<CardModel>) => void,
+    hero: HeroModel,
+    enemy: EnemyModel,
+    setDiscardPile: (value: React.SetStateAction<CardModel[]>) => void,
+    setHeroSelected: (value: React.SetStateAction<HeroModel>) => void,
+    setCurrentEnemy: (value: React.SetStateAction<EnemyModel>) => void,
+    setHand: (value: React.SetStateAction<CardModel[]>) => void
+  ) {}
 }

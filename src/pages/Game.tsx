@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../style/Game.css";
 import "../style/Responsive.css";
 import Intro from "../components/game/Intro";
-import {heroArray} from "../data/Heroes";
+import { heroArray } from "../data/Heroes";
 import { HeroModel } from "../interfaces/Hero";
 import { EnemyModel } from "../interfaces/Enemy";
 import { CardModel } from "../interfaces/Card";
@@ -83,14 +83,12 @@ function Game() {
     const rand = Math.random();
     setLastCard(card);
 
-    if (currentEnemy.hp === 0) {
+    if (currentEnemy.hp <= 0) {
       //if enemy is dead
       alert("Enemy is dead, end turn.");
-
     } else if (heroSelected.mana - card.cost < 0) {
       //if hero doesn't have enought mana
       alert("Not enought mana, pick an other card or end turn");
-
     } else if (card.type === "Defense") {
       // if defence card played
       setDiscardPile((prev) => [...prev, card]);
@@ -102,7 +100,6 @@ function Game() {
         };
       });
       setHand(hand.filter((item) => item.id !== card.id));
-
     } else if (card.type === "Attack") {
       //if enemy doesn't dodge the attack
       if (rand > currentEnemy.dodge / 100) {
@@ -133,7 +130,6 @@ function Game() {
         });
         setHand(hand.filter((item) => item.id !== card.id));
       }
-      
     } else if (card.type === "Utility") {
       setDiscardPile((prev) => [...prev, card]);
       setHeroSelected((prev) => {
@@ -144,35 +140,34 @@ function Game() {
   };
 
   const endTurn = () => {
-    const rand = Math.random();
-    const enemyDmg: number = currentEnemy.attack(rand);
+    console.log(gameState);
     if (currentEnemy.hp === 0) {
       enemies.length
         ? setGameState(gameStatus.enemyDead)
-        : setGameState(gameStatus.endGame);
-    } else if (heroSelected.defense + heroSelected.hp <= enemyDmg) {
-      setHeroSelected((prev) => {
-        return {
-          ...prev,
-          hp: 0,
-        };
-      });
+        : setGameState(gameStatus.endGame)
+      return
+    }
+
+    if (heroSelected.hp === 0) {
       setGameState(gameStatus.endGame);
     } else {
       setGameState(gameStatus.Efighting);
       setTimeout(() => {
-        setHeroSelected((prev) => {
-          return heroSelected.defense
-            ? enemyDmg <= heroSelected.defense
-              ? { ...prev, mana: heroInitalStats.mana, defense: 0 }
-              : {
-                  ...prev,
-                  hp: prev.hp + heroSelected.defense - enemyDmg,
-                  mana: heroInitalStats.mana,
-                  defense: 0,
-                }
-            : { ...prev, hp: prev.hp - enemyDmg, mana: heroInitalStats.mana };
-        });
+        const rand = Math.random()
+
+        if (rand > 0.8){
+          currentEnemy.useBuff(setCurrentEnemy);
+          setHeroSelected((prev) => {
+            return { ...prev, mana: heroInitalStats.mana, defense: 0 };
+          });
+        } else {
+          currentEnemy.useAttack(
+            heroSelected,
+            heroInitalStats,
+            setHeroSelected,
+            setGameState
+          );
+        }
         setGameState(gameStatus.Hfighting);
         drawCards(heroSelected.handSize);
       }, 1500);
