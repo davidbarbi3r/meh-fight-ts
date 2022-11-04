@@ -153,13 +153,21 @@ function Game() {
     } else {
       setGameState(gameStatus.Efighting);
       setTimeout(() => {
-        currentEnemy.useAttack(
-          heroSelected,
-          heroInitalStats,
-          setHeroSelected,
-          setGameState
-        );
-        currentEnemy.useBuff(setCurrentEnemy);
+        const rand = Math.random()
+
+        if (rand > 0.8){
+          currentEnemy.useBuff(setCurrentEnemy);
+          setHeroSelected((prev) => {
+            return { ...prev, mana: heroInitalStats.mana, defense: 0 };
+          });
+        } else {
+          currentEnemy.useAttack(
+            heroSelected,
+            heroInitalStats,
+            setHeroSelected,
+            setGameState
+          );
+        }
         setGameState(gameStatus.Hfighting);
         drawCards(heroSelected.handSize);
       }, 1500);

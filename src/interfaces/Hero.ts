@@ -1,4 +1,5 @@
-import { Card } from "./Card";
+import { Card, CardModel } from "./Card";
+import { EnemyModel } from "./Enemy";
 
 export interface HeroModel {
     id: string;
@@ -31,7 +32,5 @@ export class Hero implements HeroModel {
       public gold: number,
       public isDead: boolean = false
     ) {}
-    public useCard(){
-
-    }  
+    
   }

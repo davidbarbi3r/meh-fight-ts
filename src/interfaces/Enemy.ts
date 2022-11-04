@@ -25,10 +25,10 @@ export interface EnemyModel {
     heroInitial: HeroModel,
     setHero: (value: React.SetStateAction<HeroModel>) => void,
     setGame: (value: React.SetStateAction<gameStatus>) => void
-  )=> void;
+  ) => void;
   useBuff: (
     setCurrentEnemy: (value: React.SetStateAction<EnemyModel>) => void
-  )=> void;
+  ) => void;
 }
 
 export class Enemy implements EnemyModel {
@@ -44,6 +44,7 @@ export class Enemy implements EnemyModel {
     public miss: number, //increase missed attack probability
     public dodge: number, //enemy can dodge hero attacks
     public loot: CardModel[],
+    private heal: number = 0.1 * hp,
     public actionType: actionType = "attack",
     public isDead: boolean = false
   ) {}
@@ -59,9 +60,9 @@ export class Enemy implements EnemyModel {
     const attackDmg = this.dmgCalcul(rand);
     if (currentHero.defense + currentHero.hp <= attackDmg) {
       setHero((prev) => {
-        return ({ ...prev, isDead: true, hp: 0 });
-      })
-      setGame(gameStatus.endGame)
+        return { ...prev, isDead: true, hp: 0 };
+      });
+      setGame(gameStatus.endGame);
     } else {
       setHero((prev) => {
         return currentHero.defense
@@ -80,18 +81,18 @@ export class Enemy implements EnemyModel {
             };
       });
     }
-  }
+  };
 
   public useBuff = (
-    setCurrentEnemy: (value: React.SetStateAction<EnemyModel>)=> void
+    setCurrentEnemy: (value: React.SetStateAction<EnemyModel>) => void
   ) => {
     const rand = Math.random();
     if (rand < 0.5) {
-      setCurrentEnemy((prev) => ({ ...prev, hp: prev.hp + 7.5 }));
+      setCurrentEnemy((prev) => ({ ...prev, hp: prev.hp + this.heal }));
     } else {
-      setCurrentEnemy((prev) => ({ ...prev, defense: prev.defense + 5 }));
+      setCurrentEnemy((prev) => ({ ...prev, defense: prev.defense + this.heal }));
     }
-  }
+  };
 
   dmgCalcul(random: number): number {
     if (random < this.crit / 100) {
