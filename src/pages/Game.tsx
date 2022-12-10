@@ -1,16 +1,17 @@
 import { useState } from "react";
-import "../style/Game.css";
-import "../style/Responsive.css";
-import Intro from "../components/game/Intro";
-import { heroArray } from "../data/Heroes";
-import { HeroModel } from "../interfaces/Hero";
-import { EnemyModel } from "../interfaces/Enemy";
-import { CardModel } from "../interfaces/Card";
-import { getDeck, getEnemies, shuffle } from "../utilities/Utils";
-import { gameStatus } from "../interfaces/Game";
-import BattleGround from "../components/game/BattleGround";
-import SelectLoot from "../components/game/SelectLoot";
-import EndGame from "../components/game/EndGame";
+import "../game/style/Game.css";
+import "../app/style/Responsive.css";
+import Intro from "../charSelection/components/Intro";
+import { heroArray } from "../heroes/data/Heroes";
+import { HeroModel } from "../heroes/types/Hero";
+import { EnemyModel } from "../enemies/types/Enemy";
+import { CardModel } from "../cards/types/Card";
+import { getDeck, getEnemies, shuffle } from "../app/utils/Shuffle";
+import { gameStatus } from "../game/types/Game";
+import BattleGround from "../game/component/BattleGround";
+import SelectLoot from "../lootSelection/component/SelectLoot";
+import EndGame from "../endGame/components/EndGame";
+
 
 function Game() {
   const [gameState, setGameState] = useState(gameStatus.intro);
@@ -144,8 +145,8 @@ function Game() {
     if (currentEnemy.hp === 0) {
       enemies.length
         ? setGameState(gameStatus.enemyDead)
-        : setGameState(gameStatus.endGame)
-      return
+        : setGameState(gameStatus.endGame);
+      return;
     }
 
     if (heroSelected.hp === 0) {
@@ -153,9 +154,9 @@ function Game() {
     } else {
       setGameState(gameStatus.Efighting);
       setTimeout(() => {
-        const rand = Math.random()
+        const rand = Math.random();
 
-        if (rand > 0.8){
+        if (rand > 0.8) {
           currentEnemy.useBuff(setCurrentEnemy);
           setHeroSelected((prev) => {
             return { ...prev, mana: heroInitalStats.mana, defense: 0 };
