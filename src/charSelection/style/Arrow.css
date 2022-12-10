@@ -1,0 +1,22 @@
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background-color: lightgray;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .carousel-arrow.prev {
+    left: 10px;
+  }
+  
+  .carousel-arrow.next {
+    right: 10px;
+  }
+  
+  .carousel-arrow.hidden {
+    visibility: hidden;
+  }
