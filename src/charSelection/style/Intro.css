@@ -13,6 +13,8 @@
   .game-starter-charSelection {
     display: flex;
     margin: 2em;
+    width: 700px;
+    height: 800px;
   }
   
   .game-starter-char {
@@ -21,6 +23,8 @@
     border-radius: 10px;
     padding: 0.2em;
     transition: all 200ms ease;
+    width: 250px;
+    height: min-content;
   }
   
   .game-starter-char-text {
@@ -35,5 +39,7 @@
   
   .game-starter-char img {
     max-width: 100%;
+    width: 100%;
+
   }
   
