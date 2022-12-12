@@ -13,6 +13,7 @@ export const Carousel = ({ items, selectHero }: ICarousel) => {
     
     const [currentIndex, setCurrentIndex] = useState(0);
     const currentItemRef = useRef<HTMLButtonElement>(null);
+    const [showHeroDetails, setShowHeroDetails] = useState(false)
   
     const changeItem = (index: number) => {
       setCurrentIndex(index);
@@ -23,7 +24,7 @@ export const Carousel = ({ items, selectHero }: ICarousel) => {
       if (currentItemRef.current) {
         currentItemRef.current.scrollIntoView({
           behavior: 'smooth',
-          block: 'center'
+          block: 'center',
         });
       }
     }, []);
@@ -35,20 +36,24 @@ export const Carousel = ({ items, selectHero }: ICarousel) => {
             key={item.id}
             ref={index === currentIndex ? currentItemRef : null}
             className={`carousel-item ${
-              index < currentIndex ? 'prev' : index > currentIndex ? 'next' : ''
+              index < currentIndex ? 'prev' : index > currentIndex+1 ? 'hidden' : index > currentIndex ? "next" : ''
             } game-starter-char`}
             style={
               index === currentIndex
-                ? { background: 'lightblue' }
+                ? { background: 'lightgrey' }
                 : { background: 'white' }
             }
             onClick={() => selectHero(item.id)}
           >
             <img src={`${item.img}`} alt={`${item.name}`}></img>
-            <div className="Stats">
+            <div className="stats">
             <p>Hp: {item.hp} ❤</p>
             <p>Mana: {item.mana} 💧</p>
-            <p>Hand Size: {item.handSize} 🃏</p>
+            <p>ProbCrit: {item.crit}</p>
+            <p>CritDmg: {item.critDmg}</p>
+            <p>Gold: {item.gold}</p>
+            <p>ProbMiss: {item.miss}</p>
+            <p>NbCards: {item.handSize} 🃏</p>
             </div>
           </button>
         ))}

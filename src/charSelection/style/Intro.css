@@ -13,8 +13,8 @@
   .game-starter-charSelection {
     display: flex;
     margin: 2em;
-    width: 700px;
-    height: 800px;
+    width: 400px;
+    height: 500px;
   }
   
   .game-starter-char {
@@ -22,15 +22,13 @@
     margin: 0.75em;
     border-radius: 10px;
     padding: 0.2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     transition: all 200ms ease;
-    width: 250px;
-    height: min-content;
   }
-  
-  .game-starter-char-text {
-    padding: 0.1em;
-  }
-  
+    
   .game-starter-char:focus,
   .game-starter-char:hover {
     border: 5px solid black;
@@ -41,5 +39,22 @@
     max-width: 100%;
     width: 100%;
 
+  }
+
+  .stats {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 35%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stats p {
+    margin-bottom: 0.1em;
+    margin-top: 0;
+    text-align: left;
+    padding-left: 0.1em;
+    width: 49%;
   }
   

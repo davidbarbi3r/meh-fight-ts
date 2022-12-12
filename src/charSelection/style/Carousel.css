@@ -1,20 +1,28 @@
 .carousel-container {
     overflow: hidden;
     position: relative;
+    width: 100%;
+    /* scroll-snap-type: x mandatory; */
   }
   
   .carousel-item {
     position: absolute;
-    left: 0;
-    right: 0;
+    width: 50%;
+    left: 25%;
     top: 0;
     bottom: 0;
+    transition: all 0.2s ease;
+    scroll-snap-align: start;
   }
   
   .carousel-item.prev {
-    transform: translateX(-50%);
+    transform: translateX(-120%);
   }
   
   .carousel-item.next {
-    transform: translateX(50%);
+    transform: translateX(120%);
+  }
+
+  .carousel-item.hidden {
+    display: none;
   }
