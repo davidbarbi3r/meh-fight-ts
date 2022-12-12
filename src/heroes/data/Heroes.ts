@@ -38,8 +38,8 @@ export const heroArray: HeroModel[] = [
     30,
     5,
     5,
-    6,
-    100
+    4,
+    500
   ),
   new Hero(
     nanoid(8),
@@ -48,10 +48,10 @@ export const heroArray: HeroModel[] = [
     11,
     0,
     "https://lh3.googleusercontent.com/mUHPCSkCjL1zKHklmbDSmK6xz_Z424A2yQuLEqRI9dvTnXrMN4yKMr-_uyzY5T5zH2brAPquw5vIU94J3XMQpejfelzwNSuM6AhK=w600",
-    5,
+    30,
+    60,
     10,
-    10,
-    3,
+    4,
     100
   ),
 ];
